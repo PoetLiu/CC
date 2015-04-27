@@ -4,6 +4,13 @@
 #include <pthread.h>
 #include "queue.h"
 
+/*--------------------------------------------
+ * Node1.pNext->Node2.pNext->Node3.pNext->NULL
+ *   |	 		       | 		
+ *  rear 		     front
+ *--------------------------------------------
+*/
+
 Queue *init_queue()
 {
 	Queue *new_q = NULL;
@@ -14,6 +21,7 @@ Queue *init_queue()
 	new_q->rear	= NULL;
 	new_q->length	= 0;
 	pthread_mutex_init(&new_q->lock, NULL);
+
 	return new_q;
 }
 
@@ -29,6 +37,7 @@ int empty_queue(Queue *pQueue)
 	return len == 0;
 }
 
+// 入队， 从队列末尾添加一个节点
 int en_queue(Queue *pQueue, void *data, int dlen)
 {
 	Node *new_node = NULL;
@@ -64,6 +73,7 @@ int en_queue(Queue *pQueue, void *data, int dlen)
 
 	pQueue->length++;
 	pthread_mutex_unlock(&pQueue->lock);
+
 	return 0;
 }
 

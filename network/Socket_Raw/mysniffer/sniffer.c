@@ -325,6 +325,9 @@ void * msg_proc_thread(void *thread_arg)
 	DEBUG("create %s proc thread ok tid:%u\n", proc->name, (unsigned int)tid);
 	while (1) {
 		pthread_testcancel();
+		// TODO cancel empty_queue check 
+		// avoid the time window between empty_queue check and de_queue call
+		// may cause competition between mutil-threads
 		if (empty_queue(que) == 0) {
 			de_queue(que, &dbuf, &dlen, cp_flag);
 			thread_printf(proc->proc_func(dbuf, dlen, obuf, sizeof(obuf)));
@@ -444,6 +447,11 @@ int sniffer_init(int *sk, char **module_name, int name_num)
 int main(int argc, char **argv)
 {
 	int sock_fd;
+
+	if (argc < 2) {
+		printf("Usage %s <tcp|udp|arp>\n", argv[0]);
+		return -1;
+	}
 	
 	if (sniffer_init(&sock_fd, argv+1, argc-1) != 0) {
 		DEBUG("init faild\n");
