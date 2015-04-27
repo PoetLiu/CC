@@ -1,2 +1,2 @@
 TARGET=main
-include /home/liupeng/program/make.inc
+include $(PROG)/make.inc
