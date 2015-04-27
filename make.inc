@@ -11,7 +11,7 @@ INCLUDE_DIRS+= -I$(PROG)/include
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) $(LIBS)
+	$(CC) -o $@.out $^ $(CFLAGS) $(LDFLAGS) $(LIBS)
 
 %.o: %.c
 	$(CC) -c $< -o $@ $(CFLAGS) $(INCLUDE_DIRS)
@@ -21,5 +21,5 @@ tar: clean
 	tar -zcvf $(BACKUP_DIRS)/`date +%s`.$(TARGET).tar.gz ../$(TARGET)
 
 clean:
-	rm -rf *.o $(TARGET)
+	rm -rf *.o $(TARGET).out
 		
