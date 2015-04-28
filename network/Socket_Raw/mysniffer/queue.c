@@ -37,6 +37,11 @@ int empty_queue(Queue *pQueue)
 	return len == 0;
 }
 
+static int _empty_queue(Queue *pQueue)
+{
+	return pQueue->length == 0;
+}
+
 // 入队， 从队列末尾添加一个节点
 int en_queue(Queue *pQueue, void *data, int dlen)
 {
@@ -77,6 +82,7 @@ int en_queue(Queue *pQueue, void *data, int dlen)
 	return 0;
 }
 
+// node->date maybe NULL, if user used cp_flag=0 when call de_queue
 static int free_node(Node *node)
 {
 	POINTER_CHECK(node, -1);
@@ -92,15 +98,16 @@ static int free_node(Node *node)
 int de_queue(Queue *pQueue, void *data, int *dlen, int cp_flag)
 {
 	Node *de_node = NULL;
-	int ret;
+	int ret = 0;
 	POINTER_CHECK(pQueue, -1);
 	
-	if (empty_queue(pQueue))
-		return -1;
-
 	pthread_mutex_lock(&pQueue->lock);
-	de_node	= pQueue->front;
+	if (_empty_queue(pQueue)) {
+		ret	= -2;
+		goto ret_l;
+	}
 
+	de_node	= pQueue->front;
 	if (data) {
 		if (cp_flag) {
 			memcpy(data, de_node->data, de_node->dlen);
@@ -118,12 +125,16 @@ int de_queue(Queue *pQueue, void *data, int *dlen, int cp_flag)
 
 	pQueue->front	= de_node->pPre;
 	pQueue->length--;
-	ret	= free_node(de_node);
-	pthread_mutex_unlock(&pQueue->lock);
+	ret		= free_node(de_node);
 
+ret_l:
+	pthread_mutex_unlock(&pQueue->lock);
 	return ret;
 }
 
+// fmt:
+// d	十进制整数输出	
+// s	字符串输出
 static void print_data(void *buf, int blen, const char fmt)
 {
 	int i;
@@ -142,6 +153,7 @@ static void print_data(void *buf, int blen, const char fmt)
 	printf(" len:%d\n", blen);
 }
 
+// print Node data from queue front to rear
 void travel_queue(Queue *pQueue, const char fmt)
 {
 

@@ -327,9 +327,8 @@ void * msg_proc_thread(void *thread_arg)
 		pthread_testcancel();
 		// TODO cancel empty_queue check 
 		// avoid the time window between empty_queue check and de_queue call
-		// may cause competition between mutil-threads
-		if (empty_queue(que) == 0) {
-			de_queue(que, &dbuf, &dlen, cp_flag);
+		// whitch may cause competition between mutil-threads
+		if (de_queue(que, &dbuf, &dlen, cp_flag) == 0) {
 			thread_printf(proc->proc_func(dbuf, dlen, obuf, sizeof(obuf)));
 			SAFE_FREE(dbuf);
 			obuf[0]	= '\0';
@@ -410,7 +409,7 @@ int sniffer_init(int *sk, char **module_name, int name_num)
 
 	for (i = 0; i < name_num; i++) {
 		if ((msg_module = get_module_by_name(module_name[i])) == NULL) {
-			DEBUG("module not fund %s\n", module_name[i]);
+			DEBUG("module not exist %s\n", module_name[i]);
 			return -1;
 		}
 		tmp = (struct msg_thread*)malloc(sizeof(struct msg_thread));
