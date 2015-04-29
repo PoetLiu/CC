@@ -1,3 +1,6 @@
 *.[oa]
 *.out
+*.tar
+*.gz
+*.rar
 backup
