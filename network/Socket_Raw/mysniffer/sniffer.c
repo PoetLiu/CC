@@ -325,9 +325,6 @@ void * msg_proc_thread(void *thread_arg)
 	DEBUG("create %s proc thread ok tid:%u\n", proc->name, (unsigned int)tid);
 	while (1) {
 		pthread_testcancel();
-		// TODO cancel empty_queue check 
-		// avoid the time window between empty_queue check and de_queue call
-		// whitch may cause competition between mutil-threads
 		if (de_queue(que, &dbuf, &dlen, cp_flag) == 0) {
 			thread_printf(proc->proc_func(dbuf, dlen, obuf, sizeof(obuf)));
 			SAFE_FREE(dbuf);

@@ -1,4 +1,11 @@
 #include <stdio.h>
+/*
+ * signed char 'FF' to uint32_t:ffffffff
+ * signed char 'FF' to int32_t:-1
+ * unsigned char 'FF' to uint32_t:255
+ * unsigned char 'FF' to int32_t:255
+ * 
+ */
 
 int main(void) 
 {

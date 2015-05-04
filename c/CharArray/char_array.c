@@ -1,5 +1,13 @@
 #include<stdio.h>
 
+/*
+ * size of mac:12, size of mac[0]:6, size of mac[0][0]:1
+ * Mac 00:1C:C091:98:68
+ * size_char_array:4
+ * size_int_array:4
+ *
+ */
+
 int size_char_array(char mac[][6])
 {
 	return sizeof(mac);
