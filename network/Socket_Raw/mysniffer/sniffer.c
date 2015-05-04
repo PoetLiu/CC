@@ -12,7 +12,7 @@
 
 int socket_init();
 void main_loop(int);
-unsigned short check_sum(u_int16_t*, int);
+u_int16_t check_sum(u_int16_t*, int);
 void sig_int(int);
 void sig_quit(int);
 char *mac2str(unsigned char *, char *);
@@ -344,6 +344,7 @@ void main_loop(int sk)
 	
 	eth	= (struct ethhdr*)recv_buf;
 	iph	= (struct ip*)(recv_buf + sizeof(struct ethhdr));
+
 	while (1) {
 		rlen = recvfrom(sk, recv_buf, sizeof(recv_buf), 0, NULL, 0);
 		switch (ntohs(eth->h_proto)) {
@@ -404,6 +405,8 @@ int sniffer_init(int *sk, char **module_name, int name_num)
 	sniffer.udp_pkg	= 0;
 	sniffer.arp_pkg	= 0;
 
+
+	/* create child thread */
 	for (i = 0; i < name_num; i++) {
 		if ((msg_module = get_module_by_name(module_name[i])) == NULL) {
 			DEBUG("module not exist %s\n", module_name[i]);
