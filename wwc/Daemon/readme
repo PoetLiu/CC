@@ -1,0 +1,4 @@
+./make.sh [-d]
+	d: 编译debug版本(增加-g -DDEBUG 选项)
+
+默认编译release版本(增加-O2选项，使用strip去除符号)
