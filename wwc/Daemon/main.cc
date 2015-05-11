@@ -16,13 +16,11 @@ using namespace std;
 
 #define MYSQL_HOST            "localhost"
 #define MYSQL_USER            "root"
-#define MYSQL_PASSWD          "weiwenchao"
+#define MYSQL_PASSWD          "liupeng"
 #define MYSQL_DATABASE        "Exon"
 
-
-#define DEBUG
 #ifdef DEBUG
-#define output_log              printf
+#define output_log        printf
 #else
 #define output_log        ;
 #endif
