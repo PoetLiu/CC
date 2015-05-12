@@ -16,7 +16,7 @@ using namespace std;
 
 #define MYSQL_HOST            "localhost"
 #define MYSQL_USER            "root"
-#define MYSQL_PASSWD          "weiwenchao"
+#define MYSQL_PASSWD          "liupeng"
 #define MYSQL_DATABASE        "Exon"
 
 
