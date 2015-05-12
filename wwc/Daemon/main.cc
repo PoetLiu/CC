@@ -19,10 +19,8 @@ using namespace std;
 #define MYSQL_PASSWD          "liupeng"
 #define MYSQL_DATABASE        "Exon"
 
-
-#define DEBUG
 #ifdef DEBUG
-#define output_log              printf
+#define output_log        printf
 #else
 #define output_log        ;
 #endif
