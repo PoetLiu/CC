@@ -1,0 +1,12 @@
+E:\SoftwareFiles\Project\NoteSync\NoteSync\bin\Debug\NoteSync.exe.config
+E:\SoftwareFiles\Project\NoteSync\NoteSync\bin\Debug\NoteSync.exe
+E:\SoftwareFiles\Project\NoteSync\NoteSync\bin\Debug\NoteSync.pdb
+E:\SoftwareFiles\Project\NoteSync\NoteSync\obj\Debug\NoteSync.csprojResolveAssemblyReference.cache
+E:\SoftwareFiles\Project\NoteSync\NoteSync\obj\Debug\NoteSync.Properties.Resources.resources
+E:\SoftwareFiles\Project\NoteSync\NoteSync\obj\Debug\NoteSync.csproj.GenerateResource.Cache
+E:\SoftwareFiles\Project\NoteSync\NoteSync\obj\Debug\NoteSync.exe
+E:\SoftwareFiles\Project\NoteSync\NoteSync\obj\Debug\NoteSync.pdb
+E:\SoftwareFiles\Project\NoteSync\NoteSync\obj\Debug\NoteSync.main.resources
+E:\SoftwareFiles\Project\NoteSync\NoteSync\obj\Debug\Interop.Microsoft.Office.Interop.OneNote.dll
+E:\SoftwareFiles\Project\NoteSync\NoteSync\obj\Debug\NoteSync.csproj.ResolveComReference.cache
+E:\SoftwareFiles\Project\NoteSync\NoteSync\obj\Debug\NoteSync.userinfo.resources
