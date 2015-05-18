@@ -443,6 +443,7 @@ int ruijie_start_auth(char * name, char*passwd, char* nic_name, int authmode,
       ruijie_start(authmode & 0x1F);
     }
   while (success && tryed < 5);
+
   return success;
 }
 
