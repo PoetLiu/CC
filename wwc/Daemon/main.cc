@@ -75,7 +75,7 @@ void* Processing_Connection(void *fd)
                                 }
                                 buffer[ret]     = 0;
                                 MySQLCon->add_project_content_by_code(code, string(buffer));
-                                data_count+=ret;
+                                data_count 	+= ret;
                         }
                         ret     = send(cfd, header, 32, 0);
                         }break;
