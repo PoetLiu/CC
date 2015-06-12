@@ -2,7 +2,7 @@
 
 /*
  * size of mac:12, size of mac[0]:6, size of mac[0][0]:1
- * Mac 00:1C:C091:98:68
+ * Mac 00:1C:C0:91:98:68
  * size_char_array:4
  * size_int_array:4
  *
@@ -10,6 +10,7 @@
 
 int size_char_array(char mac[][6])
 {
+	printf("mac:%p mac+1:%p\n", mac, mac+1);
 	return sizeof(mac);
 }
 
@@ -24,6 +25,10 @@ int main(void)
 	char mac[2][6] = {
 		0x30, 0x30, 0x31, 0x43, 0x43, 0x30,
 		0x39, 0x31, 0x39, 0x38, 0x36, 0x38
+	};
+
+	unsigned char mac1[6] = {
+		0x00, 0x1C, 0xC0, 0x91, 0x98, 0x98
 	};
 
 	int test[10];
