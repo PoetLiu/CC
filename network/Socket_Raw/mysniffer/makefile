@@ -2,13 +2,13 @@ INCLUDE_DIRS+= -I$(PROG)/include/list
 INCLUDE_DIRS+= -I$(PROG)/include/queue
 TARGET=mysniffer.out
 LIBQUEUE=$(PROG)/lib/queue/queue.o
-DEPEND=$(LIBQUEUE)
+DEPEND=libqueue
 LIBS+=$(LIBQUEUE)
 #CFLAGS+=-D__DISP_ALL
 LDFLAGS+=-lpthread
 
 include $(PROG)/make.inc 
 
-$(LIBQUEUE):
+libqueue:
 	make -C $(PROG)/lib/queue
 

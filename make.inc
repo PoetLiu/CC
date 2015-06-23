@@ -5,7 +5,7 @@ CC=gcc
 PROG=/home/liupeng/program/
 BACKUP_DIRS=$(PROG)/backup/
 
-.PHONY: clean all tar
+.PHONY: clean all tar $(DEPEND)
 
 all: $(DEPEND) $(TARGET) 
 
