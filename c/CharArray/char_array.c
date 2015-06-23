@@ -22,7 +22,7 @@ int size_int_array(int test[])
 int main(void)
 {
 	int i, j;
-	char mac[2][6] = {
+	char mac[][6] = {
 		0x30, 0x30, 0x31, 0x43, 0x43, 0x30,
 		0x39, 0x31, 0x39, 0x38, 0x36, 0x38
 	};
@@ -30,6 +30,13 @@ int main(void)
 	unsigned char mac1[6] = {
 		0x00, 0x1C, 0xC0, 0x91, 0x98, 0x98
 	};
+
+	printf("mac1: %x-%x-%x-%x-%x-%x\n", mac1[0], mac1[1], mac1[2], mac1[3], mac1[4], mac1[5]);
+
+	char mac2[6] = {
+		0x00, 0x1C, 0xC0, 0x91, 0x98, 0x98
+	};
+	printf("mac2: %x-%x-%x-%x-%x-%x\n", mac2[0], mac2[1], mac2[2], mac2[3], mac2[4], mac2[5]);
 
 	int test[10];
 

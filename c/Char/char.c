@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 //unsigned -1:▒
+//equal
 
 
 int main(void)
