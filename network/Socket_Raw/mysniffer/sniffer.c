@@ -99,10 +99,10 @@ char *mac2str(uchar *mac, char *buf)
 // 校验和
 u_int16_t check_sum(u_int16_t *addr, int len)
 {
-	register int nleft = len;
-	register int sum = 0;
-	register u_int16_t *w = addr;
-	short answer = 0;
+	register u_int16_t 	*w = addr;
+	register int 		nleft = len;
+	register int 		sum = 0;
+	short 			answer = 0;
 	
 	while (nleft > 1) {
 	        sum	+= *w++;
@@ -166,8 +166,8 @@ int socket_init()
 // 16:14:38.677364
 char *get_time(char *buf, int len)
 {
-	struct timeval tv;
-	struct tm *t;
+	struct timeval	tv;
+	struct tm 	*t;
 
 	gettimeofday(&tv, NULL);
 	t	= localtime(&tv.tv_sec);
@@ -195,15 +195,15 @@ char *get_tcp_flag(const struct tcphdr *tcp, char *buf, int len)
 char *get_tcp_out(const char *dbuf, int dlen, char *obuf, int olen)
 {
 	
-	struct ip *iph;
-	struct tcphdr *tcp;
-	struct ethhdr *eth;
-	char src_mac[MAC_STR_LEN] = {0};
-	char dst_mac[MAC_STR_LEN] = {0};
-	char src_ip[IP_STR_LEN];
-	char dst_ip[IP_STR_LEN];
-	char time[TIME_STR_LEN] = {0};
-	char cflag[10] = {0};
+	struct ip	*iph;
+	struct tcphdr	*tcp;
+	struct ethhdr	*eth;
+	char	src_mac[MAC_STR_LEN] = {0};
+	char 	dst_mac[MAC_STR_LEN] = {0};
+	char 	src_ip[IP_STR_LEN];
+	char 	dst_ip[IP_STR_LEN];
+	char 	time[TIME_STR_LEN] = {0};
+	char 	cflag[10] = {0};
 	u_int16_t tcp_dlen, dst_port, src_port;
 
 	eth		= (struct ethhdr*)dbuf;
@@ -236,11 +236,11 @@ char *get_tcp_out(const char *dbuf, int dlen, char *obuf, int olen)
 
 char *get_udp_out(const char *dbuf, int dlen, char *obuf, int olen)
 {
-	struct ip *iph;
-	struct udphdr *udph;
-	u_int16_t src_port, dst_port, udp_len;
+	struct ip 	*iph;
+	struct udphdr 	*udph;
 	char src_ip[IP_STR_LEN], dst_ip[IP_STR_LEN];
 	char time[TIME_STR_LEN];
+	u_int16_t src_port, dst_port, udp_len;
 
 	iph		= (struct ip*)(dbuf + sizeof(struct ethhdr));
 	udph		= (struct udphdr*)((char *)iph + sizeof(struct ip));
