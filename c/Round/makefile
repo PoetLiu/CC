@@ -1,2 +1,2 @@
-TARGET=myround
+TARGET=myround.out
 include $(PROG)/make.inc
