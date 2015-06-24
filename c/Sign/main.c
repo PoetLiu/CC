@@ -67,7 +67,7 @@ int main(void)
 
 	int j;
 
-	for (j = 0; j < sizeof(menu)/sizeof(menu[0]); j++) {
+	for (j = 0; j < item_counter; j++) {
 		printf("%-25s\t", menu[j]->name);
 		show_bytes((byte_pointer)menu[j]->buf, menu[j]->len);
 		free(menu[j]);
