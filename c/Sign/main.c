@@ -67,6 +67,24 @@ int main(void)
 
 	int j;
 
+	/*
+	 * char(0x5f) to int               5f 00 00 00
+	 * char(0xff) to int               ff ff ff ff
+	 * char(0x5f) to uint              5f 00 00 00
+	 * char(0xff) to uint              ff ff ff ff
+	 * uchar(0x5f) to int              5f 00 00 00
+	 * uchar(0xff) to int              ff 00 00 00
+	 * uchar(0x5f) to uint             5f 00 00 00
+	 * uchar(0xff) to uint             ff 00 00 00
+	 * int(0x5f) to char               5f
+	 * int(0xffffffffu) to char        ff
+	 * int(0x5f) to uchar              5f
+	 * int(0xfffffffu) to uchar        ff
+	 * uint(0x5f) to char              5f
+	 * uint(0xfffffffu) to char        ff
+	 * uint(0x5f) to uchar             5f
+	 * uint(0xffffffu) to uchar        ff
+	 * */
 	for (j = 0; j < item_counter; j++) {
 		printf("%-25s\t", menu[j]->name);
 		show_bytes((byte_pointer)menu[j]->buf, menu[j]->len);
