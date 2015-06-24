@@ -20,7 +20,7 @@ clean:
 
 tar: clean
 	rm -rf $(TARGET).tar.gz
-	tar -zcvf $(BACKUP_DIRS)/`date +%s`.$(TARGET).tar.gz ../$(TARGEc:
+	tar -zcvf $(BACKUP_DIRS)/`date +%s`.$(TARGET).tar.gz ./
 	rm -rf *.o $(TARGET)
 		
 	
