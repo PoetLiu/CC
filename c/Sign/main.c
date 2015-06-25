@@ -67,7 +67,7 @@ int main(void)
 
 	int j;
 
-	/*
+	/* output Little Endian
 	 * char(0x5f) to int               5f 00 00 00
 	 * char(0xff) to int               ff ff ff ff
 	 * char(0x5f) to uint              5f 00 00 00
