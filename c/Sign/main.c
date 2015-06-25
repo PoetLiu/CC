@@ -41,31 +41,22 @@ struct test_item *menu[100];
 int main(void)
 {
 
-	ITEM_ADD(char, int, 0x5f);
-	ITEM_ADD(char, int, 0xff);
-
-	ITEM_ADD(char, uint, 0x5f);
-	ITEM_ADD(char, uint, 0xff);
-
-	ITEM_ADD(uchar, int, 0x5f);
-	ITEM_ADD(uchar, int, 0xff);
-
-	ITEM_ADD(uchar, uint, 0x5f);
-	ITEM_ADD(uchar, uint, 0xff);
-
-	ITEM_ADD(int, char, 0x5f);
-	ITEM_ADD(int, char, 0xffffffffu);
-
-	ITEM_ADD(int, uchar, 0x5f);
-	ITEM_ADD(int, uchar, 0xfffffffu);
-
-	ITEM_ADD(uint, char, 0x5f);
-	ITEM_ADD(uint, char, 0xfffffffu);
-
-	ITEM_ADD(uint, uchar, 0x5f);
-	ITEM_ADD(uint, uchar, 0xffffffu);
-
-	int j;
+	ITEM_ADD(char, 	int, 	0x5f);
+	ITEM_ADD(char, 	int, 	0xff);
+	ITEM_ADD(char, 	uint, 	0x5f);
+	ITEM_ADD(char, 	uint, 	0xff);
+	ITEM_ADD(uchar,	int, 	0x5f);
+	ITEM_ADD(uchar,	int, 	0xff);
+	ITEM_ADD(uchar,	uint, 	0x5f);
+	ITEM_ADD(uchar,	uint, 	0xff);
+	ITEM_ADD(int, 	char, 	0x5f);
+	ITEM_ADD(int, 	char, 	0xffffffffu);
+	ITEM_ADD(int, 	uchar, 	0x5f);
+	ITEM_ADD(int, 	uchar, 	0xfffffffu);
+	ITEM_ADD(uint, 	char, 	0x5f);
+	ITEM_ADD(uint, 	char, 	0xfffffffu);
+	ITEM_ADD(uint, 	uchar, 	0x5f);
+	ITEM_ADD(uint, 	uchar, 	0xffffffu);
 
 	/* output Little Endian
 	 * char(0x5f) to int               5f 00 00 00
@@ -85,6 +76,8 @@ int main(void)
 	 * uint(0x5f) to uchar             5f
 	 * uint(0xffffffu) to uchar        ff
 	 * */
+
+	int j;
 	for (j = 0; j < item_counter; j++) {
 		printf("%-25s\t", menu[j]->name);
 		show_bytes((byte_pointer)menu[j]->buf, menu[j]->len);
