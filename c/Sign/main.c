@@ -58,7 +58,7 @@ int main(void)
 	ITEM_ADD(uint, 	uchar, 	0x5f);
 	ITEM_ADD(uint, 	uchar, 	0xffffffu);
 
-	/* output Little Endian
+	/* output Little Endian:
 	 * char(0x5f) to int               5f 00 00 00
 	 * char(0xff) to int               ff ff ff ff
 	 * char(0x5f) to uint              5f 00 00 00
@@ -79,7 +79,7 @@ int main(void)
 
 	int j;
 	for (j = 0; j < item_counter; j++) {
-		printf("%-25s\t", menu[j]->name);
+		printf("%-28s", menu[j]->name);
 		show_bytes((byte_pointer)menu[j]->buf, menu[j]->len);
 		free(menu[j]);
 	}
