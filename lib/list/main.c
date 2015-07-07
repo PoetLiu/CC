@@ -15,7 +15,7 @@ static int free_node(PNode node)
 	return 0;
 }
 
-static int print_node(PNode node)
+static int print_node(const PNode node)
 {
 	TEST_P_NULL(node, -1);
 	TEST_P_NULL(node->data, -1);

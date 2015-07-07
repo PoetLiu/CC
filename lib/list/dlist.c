@@ -18,7 +18,7 @@
  * return	: NULL if error
  * 		  value of head if success
 **/
-inline PNode dlist_init(PNode head)
+inline PNode dlist_init(const PNode head)
 {
 	TEST_P_NULL(head, NULL);			
 	head->prev 	= head;
@@ -34,7 +34,7 @@ inline PNode dlist_init(PNode head)
  * return	: NULL, if error
  * 		  new, if success
 **/
-static inline PNode __dlist_add(PNode new, PNode prev, PNode next)
+static inline PNode __dlist_add(const PNode new, const PNode prev, const PNode next)
 {
 	TEST_P_NULL(new, NULL);
 	TEST_P_NULL(prev, NULL);
@@ -56,7 +56,7 @@ static inline PNode __dlist_add(PNode new, PNode prev, PNode next)
  * return	: NULL, if err
  * 		  new, if success
 **/
-inline PNode dlist_add(PNode head, PNode new)
+inline PNode dlist_add(const PNode head, const PNode new)
 {
 	TEST_P_NULL(head, NULL);
 	TEST_P_NULL(new, NULL);
@@ -73,7 +73,7 @@ inline PNode dlist_add(PNode head, PNode new)
  * return	: NULL, if err
  * 		  new, if success
 **/
-inline PNode dlist_add_tail(PNode head, PNode new)
+inline PNode dlist_add_tail(const PNode head, const PNode new)
 {
 	TEST_P_NULL(head, NULL);
 	TEST_P_NULL(new, NULL);
@@ -88,7 +88,7 @@ inline PNode dlist_add_tail(PNode head, PNode new)
  * return	: -1, if err
  * 		  0, if success
 **/
-static inline int __dlist_del(PNode prev, PNode next)
+static inline int __dlist_del(const PNode prev, const PNode next)
 {
 	TEST_P_NULL(prev, -1);
 	TEST_P_NULL(next, -1);
@@ -104,7 +104,7 @@ static inline int __dlist_del(PNode prev, PNode next)
  * return	: -1, if err
  * 		  0, if success
 **/
-inline int dlist_del(PNode del, NODE_DEL_HANDLE node_del)
+inline int dlist_del(const PNode del, NODE_DEL_HANDLE node_del)
 {
 	TEST_P_NULL(del, -1);
 
@@ -124,7 +124,7 @@ inline int dlist_del(PNode del, NODE_DEL_HANDLE node_del)
  * return	: 1, if empty
  * 		  0, if not empty 
 **/
-inline int dlist_empty(PNode head)
+inline int dlist_empty(const PNode const head)
 {
 	TEST_P_NULL(head, 1);
 	return  head->next == head;
@@ -137,7 +137,7 @@ inline int dlist_empty(PNode head)
  * return	: -1, if err
  * 		  0, if success
 **/
-inline int dlist_destory(PNode head, NODE_DEL_HANDLE node_del)
+inline int dlist_destory(const PNode head, NODE_DEL_HANDLE node_del)
 {
 	PNode next = head->next;
 	PNode del = next;
@@ -162,7 +162,7 @@ inline int dlist_destory(PNode head, NODE_DEL_HANDLE node_del)
  * return	: -1, if err
  * 		  0, if success
 **/
-inline int dlist_traverse(const PNode head, NODE_PRINT_HANDLE node_print)
+inline int dlist_traverse(const PNode const head, NODE_PRINT_HANDLE node_print)
 {
 	PNode node = head->next;
 
@@ -194,7 +194,7 @@ int __free_node(PNode node)
 }
 
 // a example of node_print
-int __print_node(PNode node)
+int __print_node(const PNode const node)
 {
 	TEST_P_NULL(node, -1);
 	TEST_P_NULL(node->data, -1);
