@@ -61,7 +61,7 @@ int main(void)
 		"chinese",
 	};
 
-	list_init(&head);
+	dlist_init(&head);
 	
 	for (i = 0; i < GET_ARRAY_SIZE(p); i++) {
 		node	= get_node(p[i], strlen(p[i])+1);	
@@ -69,18 +69,18 @@ int main(void)
 			DEBUG("get_node faild\n");
 			return -1;
 		}
-		list_add_tail(&head, node);
+		dlist_add_tail(&head, node);
 	}
 
-	list_traverse(&head, print_node);
+	dlist_traverse(&head, print_node);
 
 	list_for_each_node(&head, node, p1) {
 		if (node->dlen < 3)
-			list_del(node, free_node);
+			dlist_del(node, free_node);
 	}
 
-	list_traverse(&head, print_node);
-	list_destory(&head, free_node);
+	dlist_traverse(&head, print_node);
+	dlist_destory(&head, free_node);
 
 	return 0;
 }
