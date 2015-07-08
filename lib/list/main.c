@@ -15,7 +15,7 @@ static int free_node(PNode node)
 	return 0;
 }
 
-static int print_node(const PNode node)
+static int print_node(const PNode const node)
 {
 	TEST_P_NULL(node, -1);
 	TEST_P_NULL(node->data, -1);
@@ -23,7 +23,20 @@ static int print_node(const PNode node)
 	return 0;
 }
 
-static PNode get_node(void *data, int dlen)
+
+static int sort_node(const PNode node_l, const PNode node_r, const int type)
+{
+	switch (type) {
+		case DLIST_SORT_ASC:
+			return (node_l->dlen > node_r->dlen) ? 1 : 0;
+		case DLIST_SORT_DESC:
+			return (node_l->dlen < node_r->dlen) ? 1 : 0;
+		default:
+			return -1;
+	}		
+}
+
+static PNode get_node(const void * const data, const int dlen)
 {
 	PNode	node;
 
@@ -45,6 +58,17 @@ static PNode get_node(void *data, int dlen)
 		node->dlen	= dlen;
 	}
 	return node;
+}
+
+static int node_sum(PNode head)
+{
+	int sum = 0;
+	PNode node = NULL;
+	
+	list_for_each_node(head, node)
+		sum += node->dlen;
+
+	return sum;
 }
 
 
@@ -72,12 +96,17 @@ int main(void)
 		dlist_add_tail(&head, node);
 	}
 
-	dlist_traverse(&head, print_node);
+	dlist_sort(&head, sort_node, DLIST_SORT_DESC);
 
-	list_for_each_node(&head, node, p1) {
+	dlist_traverse(&head, print_node);
+	DEBUG("list size %d, total len:%d\n", dlist_size(&head), node_sum(&head));
+
+	DEBUG("deleting node dlen < 3\n");
+	list_for_each_node_safe(&head, node, p1) {
 		if (node->dlen < 3)
 			dlist_del(node, free_node);
-	}
+	} 
+	DEBUG("list size %d, total len:%d\n", dlist_size(&head), node_sum(&head));
 
 	dlist_traverse(&head, print_node);
 	dlist_destory(&head, free_node);
