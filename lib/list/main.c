@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "list.h"
 #include "debug.h"
 #include "mem.h"
@@ -71,6 +72,19 @@ static int node_sum(PNode head)
 	return sum;
 }
 
+static int lower_2_upper(PNode head)
+{
+	PNode node = NULL;
+	int i;
+	char *data;
+
+	list_for_each_node(head, node) {
+		for (i = 0, data = node->data; i < node->dlen; i++) {
+			data[i] = toupper(data[i]);
+		}
+	}
+	return 0;
+}
 
 int main(void)
 {
@@ -109,6 +123,10 @@ int main(void)
 	DEBUG("list size %d, total len:%d\n", dlist_size(&head), node_sum(&head));
 
 	dlist_traverse(&head, print_node);
+
+	lower_2_upper(&head);
+	dlist_traverse(&head, print_node);
+
 	dlist_destory(&head, free_node);
 
 	return 0;
