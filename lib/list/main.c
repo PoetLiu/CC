@@ -80,7 +80,8 @@ static int lower_2_upper(PNode head)
 
 	list_for_each_node(head, node) {
 		for (i = 0, data = node->data; i < node->dlen; i++) {
-			data[i] = toupper(data[i]);
+			if (islower(data[i]))
+				data[i] = toupper(data[i]);
 		}
 	}
 	return 0;
@@ -110,7 +111,7 @@ int main(void)
 		dlist_add_tail(&head, node);
 	}
 
-	dlist_sort(&head, sort_node, DLIST_SORT_DESC);
+	dlist_sort(&head, sort_node, DLIST_SORT_ASC);
 
 	dlist_traverse(&head, print_node);
 	DEBUG("list size %d, total len:%d\n", dlist_size(&head), node_sum(&head));
@@ -124,6 +125,7 @@ int main(void)
 
 	dlist_traverse(&head, print_node);
 
+	DEBUG("transforming to upper case\n");
 	lower_2_upper(&head);
 	dlist_traverse(&head, print_node);
 

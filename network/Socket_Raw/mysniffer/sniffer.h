@@ -55,7 +55,12 @@
 #define OUTPUT_MSG_LEN  2048
 
 #define MAC_FORMAT_STRING_CAPITAL	"%02x:%02x:%02x:%02x:%02x:%02x"
-#define MAC_FORMAT_SPLIT(mac)		(mac)[0],(mac)[1],(mac)[2],(mac)[3],(mac)[4],(mac)[5]
+#define TO_UCHAR(p)			(*(unsigned char*)(p))
+#define MAC_FORMAT_SPLIT(mac)		TO_UCHAR(mac),TO_UCHAR(mac+1),TO_UCHAR(mac+2),TO_UCHAR(mac+3),TO_UCHAR(mac+4),TO_UCHAR(mac+5)
+
+
+
+
 #define GET_ARRAY_SIZE(array) 		(sizeof(array)/sizeof(array[0]))
 
 typedef unsigned char uchar;
