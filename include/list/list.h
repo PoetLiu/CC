@@ -13,15 +13,15 @@ typedef struct _Node
 	void		*data;
 }*PNode, Node;
 
-typedef int(*NODE_DEL_HANDLE)(PNode);
-typedef int(*NODE_PRINT_HANDLE)(const PNode const);
+typedef int (*NODE_DEL_HANDLE)(const PNode);
+typedef int (*NODE_PRINT_HANDLE)(const PNode const);
 
 inline PNode dlist_init(const PNode);
 inline PNode dlist_add(const PNode, const PNode);
 inline PNode dlist_add_tail(const PNode, const PNode);
-inline int dlist_del(const PNode, NODE_DEL_HANDLE);
+inline int dlist_del(const PNode, const NODE_DEL_HANDLE);
 inline int dlist_empty(const PNode const);
-inline int dlist_destory(const PNode, NODE_DEL_HANDLE);
-inline int dlist_traverse(const PNode const, NODE_PRINT_HANDLE);
+inline int dlist_destory(const PNode, const NODE_DEL_HANDLE);
+inline int dlist_traverse(const PNode const, const NODE_PRINT_HANDLE);
 
 #endif	// _LIST_H
