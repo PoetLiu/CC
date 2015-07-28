@@ -1,0 +1,540 @@
+ruijieclient.o: ruijieclient.c ruijieclient.h ../config.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/stdio.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/features.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/uClibc_config.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/sys/cdefs.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/include/stddef.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/types.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/wordsize.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/typesizes.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/uClibc_stdio.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/wchar.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/wchar.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/pthreadtypes.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/endian.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/endian.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/byteswap.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/byteswap.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/byteswap-common.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/sgidefs.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/include/stdarg.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/stdio_lim.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/stdlib.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/sys/types.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/time.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/sys/select.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/select.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/sigset.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/time.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/sys/sysmacros.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/alloca.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/unistd.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/posix_opt.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/uClibc_posix_opt.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/confname.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/getopt.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/ctype.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/uClibc_touplow.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/string.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/signal.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/signum.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/siginfo.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/sigaction.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/sigcontext.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/sigstack.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/sigthread.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/errno.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/errno.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/linux/errno.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/asm/errno.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/asm-generic/errno-base.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/sys/ioctl.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/ioctls.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/asm/ioctls.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/asm/ioctl.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/asm-generic/ioctl.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/ioctl-types.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/sys/ttydefaults.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/uClibc_clk_tck.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/netinet/in.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/stdint.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/sys/socket.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/sys/uio.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/uio.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/socket.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/include-fixed/limits.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/include-fixed/syslimits.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/limits.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/posix1_lim.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/local_lim.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/linux/limits.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/uClibc_local_lim.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/posix2_lim.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/socket_type.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/sockaddr.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/asm/socket.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/asm/sockios.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/in.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/net/ethernet.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/linux/if_ether.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/linux/types.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/asm/types.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/asm-generic/int-ll64.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/asm/bitsperlong.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/asm-generic/bitsperlong.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/linux/posix_types.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/linux/stddef.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/asm/posix_types.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/asm/sgidefs.h \
+ myerr.h prase.h ../packet/supplicant.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/nt_kernel.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/switch_config.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_project.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/product.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/ParamModule.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/ParameterSaveConstant3.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/space_specification.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/fcntl.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/fcntl.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/arpa/inet.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/dirent.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/dirent.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/sys/syscall.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/sysnum.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_types.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/linux_list.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/nptypes.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/nc_ipc.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_lib.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/inttypes.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/getopt.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_buffer_size.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_project.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_types.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/linux_list.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/nc_types.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_netlink.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/linux/netlink.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/linux/socket.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/nc_netlink.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/linux/netfilter/nf_conntrack_tuple_common.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/cJSON.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/mntent.h \
+ /opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/paths.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/nc_ipc_init.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/nc_n300.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/br_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/switch_config.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/linux/nt_switch.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/libzebos/include/nt_ipc.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/nt_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/nt_mactbl.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/nt_kernel.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/nt_qvlan.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/nt_msg_stp.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/nt_msg_dot1x.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/nt_msg_igsp.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/bcmStormCtrl.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/bcmqos.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/nt_msg_dhcrelay.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/nt_msg_mrv_pcl.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/nt_msg_slot.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_ifstate_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_interface_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_route_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_nat_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_filter_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_arp_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_dns_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_web_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_dhcpd_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_dnsmasq_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_host_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_filter_storm_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_log_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_misc_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/wifi_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/wifi_def.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/nctypes.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/netcore_miscellaneous_data.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/wifi_cfg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_procfs_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_nettools_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_vlan_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_paracheck_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_ip_pool_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/info_collect/infoCollect_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_policy_group_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_auto_update_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_group_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_crypto_msg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/nt_error.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/halmsg.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/nt_bitop.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/nt_portmap.h \
+ /home/liupeng/extend/360/RTL-360/user/app/ruijie/ruijie.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/nc_ipc.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_interface.h \
+ /home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_bits.h
+
+ruijieclient.h:
+
+../config.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/stdio.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/features.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/uClibc_config.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/sys/cdefs.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/include/stddef.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/types.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/wordsize.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/typesizes.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/uClibc_stdio.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/wchar.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/wchar.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/pthreadtypes.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/endian.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/endian.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/byteswap.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/byteswap.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/byteswap-common.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/sgidefs.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/include/stdarg.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/stdio_lim.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/stdlib.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/sys/types.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/time.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/sys/select.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/select.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/sigset.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/time.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/sys/sysmacros.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/alloca.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/unistd.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/posix_opt.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/uClibc_posix_opt.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/confname.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/getopt.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/ctype.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/uClibc_touplow.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/string.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/signal.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/signum.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/siginfo.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/sigaction.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/sigcontext.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/sigstack.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/sigthread.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/errno.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/errno.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/linux/errno.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/asm/errno.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/asm-generic/errno-base.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/sys/ioctl.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/ioctls.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/asm/ioctls.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/asm/ioctl.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/asm-generic/ioctl.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/ioctl-types.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/sys/ttydefaults.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/uClibc_clk_tck.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/netinet/in.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/stdint.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/sys/socket.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/sys/uio.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/uio.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/socket.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/include-fixed/limits.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/include-fixed/syslimits.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/limits.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/posix1_lim.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/local_lim.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/linux/limits.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/uClibc_local_lim.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/posix2_lim.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/socket_type.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/sockaddr.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/asm/socket.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/asm/sockios.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/in.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/net/ethernet.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/linux/if_ether.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/linux/types.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/asm/types.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/asm-generic/int-ll64.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/asm/bitsperlong.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/asm-generic/bitsperlong.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/linux/posix_types.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/linux/stddef.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/asm/posix_types.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/asm/sgidefs.h:
+
+myerr.h:
+
+prase.h:
+
+../packet/supplicant.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/nt_kernel.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/switch_config.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_project.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/product.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/ParamModule.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/ParameterSaveConstant3.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/space_specification.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/fcntl.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/fcntl.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/arpa/inet.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/dirent.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/dirent.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/sys/syscall.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/bits/sysnum.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_types.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/linux_list.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/nptypes.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/nc_ipc.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_lib.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/inttypes.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/getopt.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_buffer_size.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_project.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_types.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/linux_list.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/nc_types.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_netlink.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/linux/netlink.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/linux/socket.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/nc_netlink.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/linux/netfilter/nf_conntrack_tuple_common.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/cJSON.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/mntent.h:
+
+/opt/tool/rtl/bin/../lib/gcc/mips-linux-uclibc/4.4.7/../../../../mips-linux-uclibc/include/paths.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/nc_ipc_init.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/nc_n300.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/br_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/switch_config.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/linux/nt_switch.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/libzebos/include/nt_ipc.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/nt_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/nt_mactbl.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/nt_kernel.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/nt_qvlan.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/nt_msg_stp.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/nt_msg_dot1x.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/nt_msg_igsp.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/bcmStormCtrl.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/bcmqos.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/nt_msg_dhcrelay.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/nt_msg_mrv_pcl.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/nt_msg_slot.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_ifstate_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_interface_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_route_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_nat_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_filter_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_arp_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_dns_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_web_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_dhcpd_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_dnsmasq_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_host_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_filter_storm_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_log_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_misc_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/wifi_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/wifi_def.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/nctypes.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/netcore_miscellaneous_data.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/wifi_cfg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_procfs_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_nettools_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_vlan_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_paracheck_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_ip_pool_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/info_collect/infoCollect_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_policy_group_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_auto_update_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_group_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_crypto_msg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/nt_error.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/halmsg.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/nt_bitop.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/nt_portmap.h:
+
+/home/liupeng/extend/360/RTL-360/user/app/ruijie/ruijie.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/nc_ipc.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_interface.h:
+
+/home/liupeng/extend/360/RTL-360/user/switch/include/igd/igd_bits.h:

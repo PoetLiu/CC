@@ -1,0 +1,21 @@
+{
+	"appsign":"ruijie",
+	"appname":"ruijie",
+	"version":"0.0.3",
+	"dep_version":"1.3.140101",
+	"description":"锐捷认证",
+	"bin_start":"./ruijie_app",
+	"author":"qihoo",
+	"URL":"www.360.cn",
+	"maintainer":"qihoo",
+	"email":"",
+	"app_type":"local",
+	"icon":"./ruijie.png",
+	"rom_use":1000,
+	"ram_use":1000,
+	"start_reboot":"yes",
+	"uninstall_reboot":"no",
+	"disable_reboot":"yes",
+	"uninstall":"yes",
+	"disable":"yes"
+}
