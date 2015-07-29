@@ -10,50 +10,64 @@
 #define IMG_TYPE_JPEG	IMG_TYPE_JPG	
 
 struct img{
-	char *ext_fn;	// 文件扩展名，后缀名
+	char *format;	// 文件扩展名，后缀名
 	int offset;	
 	char *type;	// 文件头中的文件类型名称
 };
 
 struct img images[] = {
 	{
-		.ext_fn	= "bmp",
+		.format	= "bmp",
 		.offset	= 0,
 		.type	= IMG_TYPE_BMP,
 	}, 
 	{
-		.ext_fn	= "png",
+		.format	= "png",
 		.offset	= 1,
 		.type	= IMG_TYPE_PNG,
 	}, 
 	{
-		.ext_fn	= "jpg",
+		.format	= "jpg",
 		.offset	= 6,
 		.type	= IMG_TYPE_JPG,
 	}, 
 	{
-		.ext_fn	= "jpeg",
+		.format	= "jpeg",
 		.offset	= 6,
 		.type	= IMG_TYPE_JPEG,
 	}
 };
 
-static struct img *get_img_by_name(char *const name)
+static char * get_format_by_name(char *name)
 {
 	int i = 0;
-	char *p = NULL;
 
 	CHECK_P_VALID(name, NULL);
 
-	if ((p = strstr(name, "."))) {
-		p	+= strlen(".");	
-		DEBUG("get fname:%s\n", p);
-	} else {
-		DEBUG("can't get fname\n");
+	for (i = strlen(name) - 2; i > -1; i--) {
+		if (name[i] == '.') {
+			DEBUG("get format:%s name:%s\n", &name[i+1], name);
+			return &name[i+1];
+		}
+	}
+
+	ERROR("format not found , name:%s\n", name);
+	return NULL;
+}
+
+static struct img *get_img_by_name(char *const name)
+{
+	int i = 0;
+	char *f = NULL;
+
+	CHECK_P_VALID(name, NULL);
+
+	if ((f = get_format_by_name(name)) == NULL) {
+		return NULL;
 	}
 
 	for (i = 0; i < GET_ARRAY_SIZE(images); i++) {
-		if (!strcmp(p, images[i].ext_fn)) 
+		if (!strcmp(f, images[i].format)) 
 			return &images[i];
 	}
 	return NULL;
@@ -85,23 +99,23 @@ static int img_head_check(struct img * const i, char * const name)
 	if (fread(buf, sizeof(char), rlen, f) != rlen) {
 		ERROR("read %s faild! err:%s\n", name, strerror(errno));
 		ret	= 2;
-		goto c_done;
+		goto done;
 	}
 
 	if (!memcmp(buf, i->type, rlen)) {
 		DEBUG("%s check valid!\n", name);
 		ret	= 0;
-		goto c_done;
+		goto done;
 	} else {
 		DEBUG("%s check invalid! type:%s real_type:%s\n", name, i->type, buf);
 		ret	= 1;
-		goto c_done;
-	
+		goto done;
 	}
 
-c_done:
-	fclose(f);
 done:
+	if (f)
+		fclose(f);
+
 	return ret;
 }
 
