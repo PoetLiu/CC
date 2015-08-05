@@ -12,161 +12,12 @@
 #include "mem.h"
 #include <stdlib.h>
 
-/*
- * Funcion	: init a list head
- * arguments	: PNode, a pointer to struct which already have mem space
- * return	: NULL if error
- * 		  value of head if success
-**/
-inline PNode dlist_init(const PNode head)
+struct _Node
 {
-	TEST_P_NULL(head, NULL);			
-	head->prev 	= head;
-	head->next	= head;
-	return head;
-}
-
-/*
- * Funcion	: add a new node between prev and next
- * arguments	: new, new node
- * 		  prev, prev node
- * 		  next, next node
- * return	: NULL, if error
- * 		  new, if success
-**/
-static inline PNode __dlist_add(const PNode new, const PNode prev, const PNode next)
-{
-	TEST_P_NULL(new, NULL);
-	TEST_P_NULL(prev, NULL);
-	TEST_P_NULL(next, NULL);
-
-	prev->next	= new;
-	next->prev	= new;
-	new->prev	= prev;
-	new->next	= next;
-
-	return new;
-}
-
-/*
- * Funcion	: user API, adding a new node to list which head point
- * 		  may be used for stack
- * arguments	: head, list head
- * 		  new, new node
- * return	: NULL, if err
- * 		  new, if success
- * example	: add 0, add 1, add 2, add 3.
- * 		  Then lists, head, head->next, ...
- * 		  3->2->1->0
-**/
-inline PNode dlist_add(const PNode head, const PNode new)
-{
-	TEST_P_NULL(head, NULL);
-	TEST_P_NULL(new, NULL);
-
-	return __dlist_add(new, head, head->next);
-}
-
-
-/*
- * Funcion	: user API, adding a new node to list which head point
- * 		  may be used for queue
- * arguments	: head, list head
- * 		  new, new node
- * return	: NULL, if err
- * 		  new, if success
- * example	: add 0, add 1, add 2, add 3.
- * 		  Then lists, head, head->next, ...
- * 		  0->1->2->3
-**/
-inline PNode dlist_add_tail(const PNode head, const PNode new)
-{
-	TEST_P_NULL(head, NULL);
-	TEST_P_NULL(new, NULL);
-
-	return __dlist_add(new, head->prev, head);
-}
-
-/*
- * Funcion	: del a node beteen prev and next
- * arguments	: prev, prev node
- * 		  next, next node
- * return	: -1, if err
- * 		  0, if success
-**/
-static inline int __dlist_del(const PNode prev, const PNode next)
-{
-	TEST_P_NULL(prev, -1);
-	TEST_P_NULL(next, -1);
-	prev->next	= next;
-	next->prev	= prev;
-	return 0;
-}
-
-/*
- * Funcion	: user API, del a node 
- * arguments	: del, node to del
- * 		  node_del, func pointer to handle data mem while del node
- * return	: -1, if err
- * 		  0, if success
-**/
-inline int dlist_del(const PNode del, NODE_DEL_HANDLE node_del)
-{
-	TEST_P_NULL(del, -1);
-
-	if(__dlist_del(del->prev, del->next))
-		return -1;
-	del->prev	= NULL;	
-	del->next	= NULL;	
-
-	if (!IS_NULL(node_del))
-		node_del(del);
-	return 0;
-}
-
-/*
- * Funcion	: swap two nodes of a dlist
- * arguments	: node_l, node left
- *		  node_r, node_right 
- * return	: -1 if error
- * 		  0 if success
-**/
-inline int dlist_swap(const PNode node_l, const PNode node_r)
-{
-	PNode l_prev = NULL;
-
-	TEST_P_NULL(node_l, -1);
-	TEST_P_NULL(node_r, -1);
-
-	l_prev = node_l->prev;
-	__dlist_del(node_l->prev, node_l->next);
-	dlist_add(node_r, node_l);
-	__dlist_del(node_r->prev, node_r->next);
-	dlist_add(l_prev, node_r);
-
-	return 0;
-}
-
-/*
- * Funcion	: count num of lists node
- * arguments	: head, list head
- * return	: 0, empty
- * 		  >0, not empty
-**/
-inline int dlist_size(const PNode const head)
-{
-	size_t	size = 0;
-	PNode	node = NULL;
-
-	TEST_P_NULL(head, 0);
-
-	if (dlist_empty(head))
-		return 0;
-	list_for_each_node(head, node)
-		size++;
-
-	return size;
-}
+	struct _Node	*next;
+	struct _Node 	*prev;
+	void		*data;
+};
 
 /*
  * Funcion	: check whether sort type valid
@@ -187,6 +38,196 @@ static inline int dlist_sort_type_valid(const int type)
 }
 
 /*
+ * Funcion	: add a new node between prev and next
+ * arguments	: new, new node
+ * 		  prev, prev node
+ * 		  next, next node
+ * return	: NULL, if error
+ * 		  new, if success
+**/
+static inline PNode __dlist_add(const PNode new, const PNode prev, const PNode next)
+{
+	CHECK_P_VALID(new, NULL);
+	CHECK_P_VALID(prev, NULL);
+	CHECK_P_VALID(next, NULL);
+
+	prev->next	= new;
+	next->prev	= new;
+	new->prev	= prev;
+	new->next	= next;
+
+	return new;
+}
+
+/*
+ * Funcion	: adding a new node to list which head point
+ * 		  may be used for stack
+ * arguments	: head, list head
+ * 		  new, new node
+ * return	: NULL, if err
+ * 		  new, if success
+ * example	: add 0, add 1, add 2, add 3.
+ * 		  Then lists, head, head->next, ...
+ * 		  3->2->1->0
+**/
+static inline PNode dlist_add(const PNode head, const PNode new)
+{
+	CHECK_P_VALID(head, NULL);
+	CHECK_P_VALID(new, NULL);
+
+	return __dlist_add(new, head, head->next);
+}
+
+
+/*
+ * Funcion	: adding a new node to list which head point
+ * 		  may be used for queue
+ * arguments	: head, list head
+ * 		  new, new node
+ * return	: NULL, if err
+ * 		  new, if success
+ * example	: add 0, add 1, add 2, add 3.
+ * 		  Then lists, head, head->next, ...
+ * 		  0->1->2->3
+**/
+static inline PNode dlist_add_tail(const PNode head, const PNode new)
+{
+	CHECK_P_VALID(head, NULL);
+	CHECK_P_VALID(new, NULL);
+
+	return __dlist_add(new, head->prev, head);
+}
+
+/*
+ * Funcion	: del a node beteen prev and next
+ * arguments	: prev, prev node
+ * 		  next, next node
+ * return	: -1, if err
+ * 		  0, if success
+**/
+static inline int __dlist_del(const PNode prev, const PNode next)
+{
+	CHECK_P_VALID(prev, -1);
+	CHECK_P_VALID(next, -1);
+	prev->next	= next;
+	next->prev	= prev;
+	return 0;
+}
+
+/*
+ * Funcion	: del a node 
+ * arguments	: del, node to del
+ * 		  node_del, func pointer to handle data mem while del node
+ * return	: -1, if err
+ * 		  0, if success
+**/
+static inline int dlist_del(PNode del, NODE_HANDLE node_del)
+{
+	CHECK_P_VALID(del, -1);
+
+	if(__dlist_del(del->prev, del->next))
+		return -1;
+	del->prev	= NULL;	
+	del->next	= NULL;	
+
+	if (!IS_NULL(node_del))
+		node_del(del->data);
+
+	SAFE_FREE(del);
+	return 0;
+}
+
+static inline PNode dlist_node_new(void *data)
+{
+	PNode new = NULL;
+
+	new	= (PNode)malloc(sizeof(Node));
+	CHECK_P_VALID(new, NULL);
+	new->data	= data;
+
+	return new;
+}
+
+/*
+ * Funcion	: swap two nodes of a dlist
+ * arguments	: node_l, node left
+ *		  node_r, node_right 
+ * return	: -1 if error
+ * 		  0 if success
+**/
+static inline int dlist_swap(const PNode node_l, const PNode node_r)
+{
+	PNode l_prev = NULL;
+
+	CHECK_P_VALID(node_l, -1);
+	CHECK_P_VALID(node_r, -1);
+
+	l_prev = node_l->prev;
+	__dlist_del(node_l->prev, node_l->next);
+	dlist_add(node_r, node_l);
+	__dlist_del(node_r->prev, node_r->next);
+	dlist_add(l_prev, node_r);
+
+	return 0;
+}
+
+inline PNode dlist_add_new(PNode head, void *data)
+{
+	PNode new = NULL;
+
+	CHECK_P_VALID(head, NULL);
+	new = dlist_node_new(data);
+	CHECK_P_VALID(new, NULL);
+	return dlist_add(head, new);
+}
+
+inline PNode dlist_add_tail_new(PNode head, void *data)
+{
+	PNode new = NULL;
+
+	CHECK_P_VALID(head, NULL);
+	new = dlist_node_new(data);
+	CHECK_P_VALID(new, NULL);
+	return dlist_add_tail(head, new);
+}
+
+/*
+ * Funcion	: init a list head
+ * return	: NULL if error
+ * 		  value of head if success
+**/
+inline PNode dlist_init()
+{
+	PNode head = dlist_node_new(NULL);
+
+	CHECK_P_VALID(head, NULL);			
+	head->prev 	= head;
+	head->next	= head;
+	return head;
+}
+
+/*
+ * Funcion	: count num of lists node
+ * arguments	: head, list head
+ * return	: 0, empty
+ * 		  >0, not empty
+**/
+inline int dlist_size(const PNode const head)
+{
+	size_t	size = 0;
+	PNode	node = NULL;
+
+	CHECK_P_VALID(head, 0);
+
+	if (dlist_empty(head))
+		return 0;
+	list_for_each_node(head, node)
+		size++;
+
+	return size;
+}
+
+/*
  * Funcion	: sort
  * arguments	: head, list head
  * 		  sorter, check whether two node need to swap
@@ -200,14 +241,14 @@ inline int dlist_sort(const PNode head, const NODE_SORT_HANDLE sorter, const int
 	PNode node_r = NULL, node_l = NULL;
 	PNode p	= NULL, p1 = NULL;
 
-	TEST_P_NULL(head, -1);
-	TEST_P_NULL(sorter, -1);
+	CHECK_P_VALID(head, -1);
+	CHECK_P_VALID(sorter, -1);
 	if (!dlist_sort_type_valid(type))	
 		return -1;
 
 	list_for_each_node_safe(head, node_l, p) {
 		list_from_start_safe(head, p, node_r, p1) {
-			if (sorter(node_l, node_r, type))
+			if (sorter(node_l->data, node_r->data, type))
 				dlist_swap(node_l, node_r);
 		}
 	}
@@ -223,7 +264,7 @@ inline int dlist_sort(const PNode head, const NODE_SORT_HANDLE sorter, const int
 **/
 inline int dlist_empty(const PNode const head)
 {
-	TEST_P_NULL(head, 1);
+	CHECK_P_VALID(head, 1);
 	return  head->next == head;
 }
 
@@ -234,22 +275,37 @@ inline int dlist_empty(const PNode const head)
  * return	: -1, if err
  * 		  0, if success
 **/
-inline int dlist_destory(const PNode head, const NODE_DEL_HANDLE node_del)
+inline int dlist_destory(const PNode head, const NODE_HANDLE node_del)
 {
-	PNode next = head->next;
-	PNode del = next;
+	PNode next = NULL, del = NULL;
 
-	TEST_P_NULL(head, -1);
+	CHECK_P_VALID(head, -1);
 
 	if (dlist_empty(head))
 		return 0;
 
-	while (del != head) {
-		next	= next->next;
+	list_for_each_node_safe(head, del, next) {
 		dlist_del(del, node_del);
-		del	= next;
 	}
 	return 0;
+}
+
+inline int dlist_del_by_filter(PNode head, NODE_HANDLE node_del, NODE_HANDLE filter)
+{
+	PNode next = NULL, del = NULL;
+
+	CHECK_P_VALID(head, -1);
+	CHECK_P_VALID(node_del, -1);
+
+	if (dlist_empty(head))
+		return 0;
+
+	list_for_each_node_safe(head, del, next) {
+		if (filter(del->data))
+			dlist_del(del, node_del);
+	}
+	return 0;
+
 }
 
 /*
@@ -259,51 +315,37 @@ inline int dlist_destory(const PNode head, const NODE_DEL_HANDLE node_del)
  * return	: -1, if err
  * 		  0, if success
 **/
-inline int dlist_traverse(const PNode const head, NODE_PRINT_HANDLE node_print)
+inline int dlist_foreach(const PNode const head, NODE_VISIT_HANDLE visit, void *ctx)
 {
-	PNode node = head->next;
+	PNode node = NULL, next = NULL;
 
-	TEST_P_NULL(head, -1);
-	TEST_P_NULL(node_print, -1);
+	CHECK_P_VALID(head, -1);
+	CHECK_P_VALID(visit, -1);
 
 	if (dlist_empty(head)) {
 		printf("empty list\n");
 		return 0;
 	}
 
-	while (node != head) {
-		node_print(node);	
-		node	= node->next;
+	list_for_each_node_safe(head, node, next) {
+		visit(node->data, ctx);
 	}
 
 	return 0;
 }
 
-inline int dlist_foreach(const PNode const head, NODE_VISIT_HANDLE visit, void *ctx)
+inline int dlist_find_max(const PNode const head, NODE_VISIT_HANDLE visit, void *ctx)
 {
-	PNode node = NULL;
-	list_for_each_node(head, node) {
-		visit(ctx, node);
-	}
-	return 0;
+	return dlist_foreach(head, visit, ctx);
 }
 
-// a example of node_del
-int __free_node(PNode node)
+inline int dlist_sum(const PNode const head, NODE_VISIT_HANDLE visit, void *ctx)
 {
-	TEST_P_NULL(node, -1);
-	if (node->data)
-		SAFE_FREE(node->data);
-	node->dlen	= 0;
-	SAFE_FREE(node);
-	return 0;
+	memset(ctx, 0, sizeof(int));
+	return dlist_foreach(head, visit, ctx);
 }
 
-// a example of node_print
-int __print_node(const PNode const node)
+inline int dlist_print(const PNode const head, NODE_VISIT_HANDLE visit)
 {
-	TEST_P_NULL(node, -1);
-	TEST_P_NULL(node->data, -1);
-	printf("%s\n", (char *)node->data);
-	return 0;
+	return dlist_foreach(head, visit, NULL);
 }
