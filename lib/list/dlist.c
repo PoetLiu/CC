@@ -11,6 +11,7 @@
 #include "list.h"
 #include "mem.h"
 #include <stdlib.h>
+#include <memory.h>
 
 struct _Node
 {

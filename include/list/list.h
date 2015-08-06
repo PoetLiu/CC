@@ -36,5 +36,6 @@ inline int dlist_find_max(const PNode const, NODE_VISIT_HANDLE, void *);
 inline int dlist_sum(const PNode const, NODE_VISIT_HANDLE, void *);
 inline int dlist_print(const PNode const, NODE_VISIT_HANDLE);
 inline int dlist_foreach(const PNode const, NODE_VISIT_HANDLE, void *);
+inline int dlist_del_by_filter(PNode, NODE_HANDLE, NODE_HANDLE);
 
 #endif	// _LIST_H
