@@ -23,4 +23,3 @@ tar: clean
 	tar -zcvf $(BACKUP_DIRS)/`date +%s`.$(TARGET).tar.gz ./
 	rm -rf *.o $(TARGET)
 		
-	
