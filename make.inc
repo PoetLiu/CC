@@ -4,6 +4,10 @@ CC=gcc
 
 PROG=/home/liupeng/program/
 BACKUP_DIRS=$(PROG)/backup/
+INCLUDE_DIRS+= -I$(PROG)/include/list 
+INCLUDE_DIRS+= -I$(PROG)/include/mem
+INCLUDE_DIRS+= -I$(PROG)/include/debug
+INCLUDE_DIRS+= -I$(PROG)/include/queue
 
 .PHONY: clean all tar $(DEPEND)
 

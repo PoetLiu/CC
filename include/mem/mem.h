@@ -3,10 +3,11 @@
 #include <stdio.h>
 #include "debug.h"
 
-#define IS_NULL(p)		(p == NULL)
-#define CHECK_P_VALID(p, ret)	{if (IS_NULL(p)) {DEBUG(#p" is NULL\n");return ret;}}
-#define SAFE_FREE(p)		{if (!IS_NULL(p)){ free(p);p = NULL;}}
-#define GET_ARRAY_SIZE(a)	(sizeof(a)/sizeof(a[0]))
+#define IS_NULL(p)			(p == NULL)
+#define P_VALID_CHECK_ACT(p, act)	{if (IS_NULL(p)) {DEBUG(#p" is NULL\n");act;}}
+#define P_VALID_CHECK_RET(p, ret)     	P_VALID_CHECK_ACT(p, return ret) 
+#define SAFE_FREE(p)			{if (!IS_NULL(p)){ free(p);p = NULL;}}
+#define GET_ARRAY_SIZE(a)		(sizeof(a)/sizeof(a[0]))
 
 #endif	// _MEM_H
 
