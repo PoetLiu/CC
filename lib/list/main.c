@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <pthread.h>
 #include "list.h"
 #include "debug.h"
 #include "mem.h"
@@ -21,18 +22,18 @@ static int data_filter(void *data)
 {
 	struct node_data *d = (struct node_data *)data;
 
-	CHECK_P_VALID(d, 0);
+	P_VALID_CHECK_RET(d, 0);
 	if (d->len < 3)
 		return 1;
 	return 0;
 }
 
-static int print_data(void *data, void *ctx)
+static int print_data(void *ctx, void *data)
 {
 	struct node_data *d = (struct node_data *)data;
 
-	CHECK_P_VALID(d, -1);
-	CHECK_P_VALID(d->buf, -1);
+	P_VALID_CHECK_RET(d, -1);
+	P_VALID_CHECK_RET(d->buf, -1);
 
 	printf("%s\n", (char *)d->buf);
 	return 0;
@@ -43,8 +44,8 @@ static int sort_node(void *data_l, void *data_r, const int type)
 	struct node_data *dl = (struct node_data *)data_l;
 	struct node_data *dr = (struct node_data *)data_r;
 
-	CHECK_P_VALID(data_l, -1);
-	CHECK_P_VALID(data_r, -1);
+	P_VALID_CHECK_RET(data_l, -1);
+	P_VALID_CHECK_RET(data_r, -1);
 
 	switch (type) {
 		case DLIST_SORT_ASC:
@@ -80,35 +81,35 @@ static struct node_data* node_data_new(const void * const data, const int len)
 	return new;
 }
 
-static int node_sum(void *data, void *ctx)
+static int node_sum(void *ctx, void *data)
 {
 	int *sum = (int *)ctx;
 	struct node_data *d = (struct node_data *)data;
 
-	CHECK_P_VALID(d, -1);
-	CHECK_P_VALID(sum, -1);
+	P_VALID_CHECK_RET(d, -1);
+	P_VALID_CHECK_RET(sum, -1);
 	*sum	+= d->len;
 	return *sum;
 }
 
-static int node_max(void *data, void *ctx)
+static int node_max(void *ctx, void *data)
 {
 	int *max = (int *)ctx;
 	struct node_data *d = (struct node_data *)data;
 
-	CHECK_P_VALID(d, -1);
-	CHECK_P_VALID(max, -1);
+	P_VALID_CHECK_RET(d, -1);
+	P_VALID_CHECK_RET(max, -1);
 	*max	= (d->len > *max) ? d->len : *max;
 	return *max;
 }
 
-static int lower_2_upper(void *data, void *ctx)
+static int lower_2_upper(void *ctx, void *data)
 {
 	int i;
 	struct node_data *d = (struct node_data *)data;
 
-	CHECK_P_VALID(d, -1);
-	CHECK_P_VALID(d->buf, -1);
+	P_VALID_CHECK_RET(d, -1);
+	P_VALID_CHECK_RET(d->buf, -1);
 
 	for (i = 0; i < d->len; i++) {
 		if (islower(d->buf[i]))
@@ -130,7 +131,7 @@ int main(void)
 		"chinese",
 	};
 
-	head	= dlist_init();
+	head	= dlist_head_init(NULL, NULL);
 	
 	for (i = 0; i < GET_ARRAY_SIZE(p); i++) {
 		data	= node_data_new(p[i], strlen(p[i])+1);	

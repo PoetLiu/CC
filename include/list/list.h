@@ -16,6 +16,21 @@ struct _Node;
 typedef struct _Node* PNode;
 typedef struct _Node Node;
 
+struct _Locker;
+typedef struct _Locker Locker;
+typedef int (*LOCKER_LOCK)(Locker *);
+typedef int (*LOCKER_UNLOCK)(Locker *);
+typedef int (*LOCKER_DESTROY)(Locker *);
+typedef Locker *(*LOCKER_CREATE)(void);
+
+struct _Locker
+{
+	LOCKER_LOCK lock;
+	LOCKER_UNLOCK  unlock;
+	LOCKER_DESTROY destroy;
+	char priv[0];
+};
+
 enum {
 	DLIST_SORT_ASC, 	// 升序排列
 	DLIST_SORT_DESC,	// 降序排列
@@ -25,7 +40,7 @@ typedef int(*NODE_HANDLE)(void *);
 typedef int(*NODE_SORT_HANDLE)(void *, void *, const int);
 typedef int(*NODE_VISIT_HANDLE)(void *, void *);
 
-inline PNode dlist_init(void);
+inline PNode dlist_head_init(PNode, LOCKER_CREATE);
 inline PNode dlist_add_new(const PNode, void *data);
 inline PNode dlist_add_tail_new(const PNode, void *data);
 inline int dlist_empty(const PNode const);

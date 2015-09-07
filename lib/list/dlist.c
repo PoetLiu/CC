@@ -20,6 +20,29 @@ struct _Node
 	void		*data;
 };
 
+static struct Locker *dlist_lock;
+
+static inline int locker_lock(Locker *thiz)
+{
+	P_VALID_CHECK_RET(thiz, -1);
+	P_VALID_CHECK_RET(thiz->lock, -1);
+	return thiz->lock(thiz);
+}
+
+static inline int locker_unlock(Locker *thiz)
+{
+	P_VALID_CHECK_RET(thiz, -1);
+	P_VALID_CHECK_RET(thiz->unlock, -1);
+	return thiz->unlock(thiz);
+}
+
+static inline int locker_destroy(Locker *thiz)
+{
+	P_VALID_CHECK_RET(thiz, -1);
+	P_VALID_CHECK_RET(thiz->destroy, -1);
+	return thiz->destroy(thiz);
+}
+
 /*
  * Funcion	: check whether sort type valid
  * arguments	: type
@@ -48,9 +71,9 @@ static inline int dlist_sort_type_valid(const int type)
 **/
 static inline PNode __dlist_add(const PNode new, const PNode prev, const PNode next)
 {
-	CHECK_P_VALID(new, NULL);
-	CHECK_P_VALID(prev, NULL);
-	CHECK_P_VALID(next, NULL);
+	P_VALID_CHECK_RET(new, NULL);
+	P_VALID_CHECK_RET(prev, NULL);
+	P_VALID_CHECK_RET(next, NULL);
 
 	prev->next	= new;
 	next->prev	= new;
@@ -73,8 +96,8 @@ static inline PNode __dlist_add(const PNode new, const PNode prev, const PNode n
 **/
 static inline PNode dlist_add(const PNode head, const PNode new)
 {
-	CHECK_P_VALID(head, NULL);
-	CHECK_P_VALID(new, NULL);
+	P_VALID_CHECK_RET(head, NULL);
+	P_VALID_CHECK_RET(new, NULL);
 
 	return __dlist_add(new, head, head->next);
 }
@@ -93,8 +116,8 @@ static inline PNode dlist_add(const PNode head, const PNode new)
 **/
 static inline PNode dlist_add_tail(const PNode head, const PNode new)
 {
-	CHECK_P_VALID(head, NULL);
-	CHECK_P_VALID(new, NULL);
+	P_VALID_CHECK_RET(head, NULL);
+	P_VALID_CHECK_RET(new, NULL);
 
 	return __dlist_add(new, head->prev, head);
 }
@@ -108,8 +131,8 @@ static inline PNode dlist_add_tail(const PNode head, const PNode new)
 **/
 static inline int __dlist_del(const PNode prev, const PNode next)
 {
-	CHECK_P_VALID(prev, -1);
-	CHECK_P_VALID(next, -1);
+	P_VALID_CHECK_RET(prev, -1);
+	P_VALID_CHECK_RET(next, -1);
 	prev->next	= next;
 	next->prev	= prev;
 	return 0;
@@ -124,7 +147,7 @@ static inline int __dlist_del(const PNode prev, const PNode next)
 **/
 static inline int dlist_del(PNode del, NODE_HANDLE node_del)
 {
-	CHECK_P_VALID(del, -1);
+	P_VALID_CHECK_RET(del, -1);
 
 	if(__dlist_del(del->prev, del->next))
 		return -1;
@@ -143,7 +166,7 @@ static inline PNode dlist_node_new(void *data)
 	PNode new = NULL;
 
 	new	= (PNode)malloc(sizeof(Node));
-	CHECK_P_VALID(new, NULL);
+	P_VALID_CHECK_RET(new, NULL);
 	new->data	= data;
 
 	return new;
@@ -160,8 +183,8 @@ static inline int dlist_swap(const PNode node_l, const PNode node_r)
 {
 	PNode l_prev = NULL;
 
-	CHECK_P_VALID(node_l, -1);
-	CHECK_P_VALID(node_r, -1);
+	P_VALID_CHECK_RET(node_l, -1);
+	P_VALID_CHECK_RET(node_r, -1);
 
 	l_prev = node_l->prev;
 	__dlist_del(node_l->prev, node_l->next);
@@ -176,9 +199,9 @@ inline PNode dlist_add_new(PNode head, void *data)
 {
 	PNode new = NULL;
 
-	CHECK_P_VALID(head, NULL);
+	P_VALID_CHECK_RET(head, NULL);
 	new = dlist_node_new(data);
-	CHECK_P_VALID(new, NULL);
+	P_VALID_CHECK_RET(new, NULL);
 	return dlist_add(head, new);
 }
 
@@ -186,9 +209,9 @@ inline PNode dlist_add_tail_new(PNode head, void *data)
 {
 	PNode new = NULL;
 
-	CHECK_P_VALID(head, NULL);
+	P_VALID_CHECK_RET(head, NULL);
 	new = dlist_node_new(data);
-	CHECK_P_VALID(new, NULL);
+	P_VALID_CHECK_RET(new, NULL);
 	return dlist_add_tail(head, new);
 }
 
@@ -197,14 +220,18 @@ inline PNode dlist_add_tail_new(PNode head, void *data)
  * return	: NULL if error
  * 		  value of head if success
 **/
-inline PNode dlist_init()
+inline PNode dlist_head_init(PNode head, LOCKER_CREATE create)
 {
-	PNode head = dlist_node_new(NULL);
+	PNode _head = head ? head : dlist_node_new(NULL);
 
-	CHECK_P_VALID(head, NULL);			
-	head->prev 	= head;
-	head->next	= head;
-	return head;
+	P_VALID_CHECK_RET(_head, NULL);
+	if (create) {
+		dlist_lock	= create();
+		P_VALID_CHECK_RET(dlist_lock, NULL);
+	}
+	_head->prev 	= _head;
+	_head->next	= _head;
+	return _head;
 }
 
 /*
@@ -218,7 +245,7 @@ inline int dlist_size(const PNode const head)
 	size_t	size = 0;
 	PNode	node = NULL;
 
-	CHECK_P_VALID(head, 0);
+	P_VALID_CHECK_RET(head, 0);
 
 	if (dlist_empty(head))
 		return 0;
@@ -242,8 +269,8 @@ inline int dlist_sort(const PNode head, const NODE_SORT_HANDLE sorter, const int
 	PNode node_r = NULL, node_l = NULL;
 	PNode p	= NULL, p1 = NULL;
 
-	CHECK_P_VALID(head, -1);
-	CHECK_P_VALID(sorter, -1);
+	P_VALID_CHECK_RET(head, -1);
+	P_VALID_CHECK_RET(sorter, -1);
 	if (!dlist_sort_type_valid(type))	
 		return -1;
 
@@ -265,7 +292,7 @@ inline int dlist_sort(const PNode head, const NODE_SORT_HANDLE sorter, const int
 **/
 inline int dlist_empty(const PNode const head)
 {
-	CHECK_P_VALID(head, 1);
+	P_VALID_CHECK_RET(head, 1);
 	return  head->next == head;
 }
 
@@ -280,7 +307,7 @@ inline int dlist_destory(const PNode head, const NODE_HANDLE node_del)
 {
 	PNode next = NULL, del = NULL;
 
-	CHECK_P_VALID(head, -1);
+	P_VALID_CHECK_RET(head, -1);
 
 	if (dlist_empty(head))
 		return 0;
@@ -295,8 +322,9 @@ inline int dlist_del_by_filter(PNode head, NODE_HANDLE node_del, NODE_HANDLE fil
 {
 	PNode next = NULL, del = NULL;
 
-	CHECK_P_VALID(head, -1);
-	CHECK_P_VALID(node_del, -1);
+	P_VALID_CHECK_RET(head, -1);
+	P_VALID_CHECK_RET(node_del, -1);
+	P_VALID_CHECK_RET(filter, -1);
 
 	if (dlist_empty(head))
 		return 0;
@@ -320,8 +348,8 @@ inline int dlist_foreach(const PNode const head, NODE_VISIT_HANDLE visit, void *
 {
 	PNode node = NULL, next = NULL;
 
-	CHECK_P_VALID(head, -1);
-	CHECK_P_VALID(visit, -1);
+	P_VALID_CHECK_RET(head, -1);
+	P_VALID_CHECK_RET(visit, -1);
 
 	if (dlist_empty(head)) {
 		printf("empty list\n");
@@ -329,7 +357,7 @@ inline int dlist_foreach(const PNode const head, NODE_VISIT_HANDLE visit, void *
 	}
 
 	list_for_each_node_safe(head, node, next) {
-		visit(node->data, ctx);
+		visit(ctx, node->data);
 	}
 
 	return 0;
