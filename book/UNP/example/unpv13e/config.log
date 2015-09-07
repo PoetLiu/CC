@@ -122,8 +122,8 @@ configure:2307: $? = 0
 configure:2319: result: yes
 configure:2403: checking for t_open in -lnsl
 configure:2434: gcc -o conftest -g -O2 -D_REENTRANT   conftest.c -lnsl  -lpthread  >&5
-/tmp/cc83NLTA.o: In function `main':
-/home/liupeng/extend/book/UNP/example/unpv13e/configure:2431: undefined reference to `t_open'
+/tmp/cccydLRC.o: In function `main':
+/home/liupeng/program/book/UNP/example/unpv13e/configure:2431: undefined reference to `t_open'
 collect2: error: ld returned 1 exit status
 configure:2437: $? = 1
 configure: failed program was:
@@ -168,8 +168,8 @@ configure:2591: checking for /home/liupeng/libresolv.a
 configure:2598: result: no
 configure:2601: checking for res_init in -lresolv
 configure:2632: gcc -o conftest -g -O2 -D_REENTRANT   conftest.c -lresolv  -lpthread  >&5
-/tmp/ccqxCvZP.o: In function `main':
-/home/liupeng/extend/book/UNP/example/unpv13e/configure:2629: undefined reference to `res_init'
+/tmp/ccdv6pqV.o: In function `main':
+/home/liupeng/program/book/UNP/example/unpv13e/configure:2629: undefined reference to `res_init'
 collect2: error: ld returned 1 exit status
 configure:2635: $? = 1
 configure: failed program was:
@@ -1176,143 +1176,10 @@ configure:4435: $? = 0
 configure:4447: result: yes
 configure:4458: checking if t_scalar_t defined
 configure:4565: gcc -c -g -O2 -D_REENTRANT  conftest.c >&5
-configure: In function 'main':
-configure:4590:2: error: unknown type name 't_scalar_t'
-configure:4568: $? = 1
-configure: failed program was:
-| #line 4463 "configure"
-| /* confdefs.h.  */
-| 
-| #define PACKAGE_NAME ""
-| #define PACKAGE_TARNAME ""
-| #define PACKAGE_VERSION ""
-| #define PACKAGE_STRING ""
-| #define PACKAGE_BUGREPORT ""
-| #define CPU_VENDOR_OS "i686-pc-linux-gnu"
-| #define HAVE_LIBPTHREAD 1
-| #define STDC_HEADERS 1
-| #define HAVE_SYS_TYPES_H 1
-| #define HAVE_SYS_SOCKET_H 1
-| #define HAVE_SYS_TIME_H 1
-| #define HAVE_TIME_H 1
-| #define HAVE_NETINET_IN_H 1
-| #define HAVE_ARPA_INET_H 1
-| #define HAVE_ERRNO_H 1
-| #define HAVE_FCNTL_H 1
-| #define HAVE_NETDB_H 1
-| #define HAVE_SIGNAL_H 1
-| #define HAVE_STDIO_H 1
-| #define HAVE_STDLIB_H 1
-| #define HAVE_STRING_H 1
-| #define HAVE_SYS_STAT_H 1
-| #define HAVE_SYS_UIO_H 1
-| #define HAVE_UNISTD_H 1
-| #define HAVE_SYS_WAIT_H 1
-| #define HAVE_SYS_UN_H 1
-| #define HAVE_SYS_PARAM_H 1
-| #define HAVE_SYS_SELECT_H 1
-| #define HAVE_SYS_SYSCTL_H 1
-| #define HAVE_POLL_H 1
-| #define HAVE_STRINGS_H 1
-| #define HAVE_SYS_IOCTL_H 1
-| #define HAVE_PTHREAD_H 1
-| #define HAVE_STROPTS_H 1
-| #define TIME_WITH_SYS_TIME 1
-| /* end confdefs.h.  */
-| 
-| #include	"confdefs.h"	/* the header built by configure so far */
-| #ifdef	HAVE_SYS_TYPES_H
-| #  include	<sys/types.h>
-| #endif
-| #ifdef	HAVE_SYS_SOCKET_H
-| #  include	<sys/socket.h>
-| #endif
-| #ifdef	HAVE_SYS_TIME_H
-| #  include    <sys/time.h>
-| #endif
-| #ifdef	HAVE_NETINET_IN_H
-| #  include    <netinet/in.h>
-| #endif
-| #ifdef	HAVE_ARPA_INET_H
-| #  include    <arpa/inet.h>
-| #endif
-| #ifdef	HAVE_ERRNO_H
-| #  include    <errno.h>
-| #endif
-| #ifdef	HAVE_FCNTL_H
-| #  include    <fcntl.h>
-| #endif
-| #ifdef	HAVE_NETDB_H
-| #  include	<netdb.h>
-| #endif
-| #ifdef	HAVE_SIGNAL_H
-| #  include	<signal.h>
-| #endif
-| #ifdef	HAVE_STDIO_H
-| #  include	<stdio.h>
-| #endif
-| #ifdef	HAVE_STDLIB_H
-| #  include	<stdlib.h>
-| #endif
-| #ifdef	HAVE_STRING_H
-| #  include	<string.h>
-| #endif
-| #ifdef	HAVE_SYS_STAT_H
-| #  include	<sys/stat.h>
-| #endif
-| #ifdef	HAVE_SYS_UIO_H
-| #  include	<sys/uio.h>
-| #endif
-| #ifdef	HAVE_UNISTD_H
-| #  include	<unistd.h>
-| #endif
-| #ifdef	HAVE_SYS_WAIT_H
-| #  include	<sys/wait.h>
-| #endif
-| #ifdef	HAVE_SYS_UN_H
-| #  include	<sys/un.h>
-| #endif
-| #ifdef	HAVE_SYS_SELECT_H
-| # include   <sys/select.h>
-| #endif
-| #ifdef	HAVE_STRINGS_H
-| # include   <strings.h>
-| #endif
-| #ifdef	HAVE_SYS_IOCTL_H
-| # include   <sys/ioctl.h>
-| #endif
-| #ifdef	HAVE_SYS_FILIO_H
-| # include   <sys/filio.h>
-| #endif
-| #ifdef	HAVE_SYS_SOCKIO_H
-| # include   <sys/sockio.h>
-| #endif
-| #ifdef	HAVE_PTHREAD_H
-| #  include	<pthread.h>
-| #endif
-| #ifdef	HAVE_POLL_H
-| #  include	<poll.h>
-| #endif
-| #ifdef	HAVE_XTI_H
-| #  include	<xti.h>
-| #endif
-| #ifdef	HAVE_NETCONFIG_H
-| #  include	<netconfig.h>
-| #endif
-| #ifdef	HAVE_NETDIR_H
-| #  include	<netdir.h>
-| #endif
-| #ifdef	HAVE_STROPTS_H
-| #  include	<stropts.h>
-| #endif
-| int
-| main ()
-| {
-|  t_scalar_t foo
-|   ;
-|   return 0;
-| }
-configure:4586: result: no
+configure:4568: $? = 0
+configure:4571: test -s conftest.o
+configure:4574: $? = 0
+configure:4586: result: yes
 configure:4596: checking if t_uscalar_t defined
 configure:4703: gcc -c -g -O2 -D_REENTRANT  conftest.c >&5
 configure:4706: $? = 0
@@ -1322,7 +1189,7 @@ configure:4724: result: yes
 configure:4735: checking for struct sockaddr.sa_len
 configure:4762: gcc -c -g -O2 -D_REENTRANT  conftest.c >&5
 configure: In function 'main':
-configure:4787:12: error: 'struct sockaddr' has no member named 'sa_len'
+configure:4786:12: error: 'struct sockaddr' has no member named 'sa_len'
 configure:4765: $? = 1
 configure: failed program was:
 | #line 4740 "configure"
@@ -1363,7 +1230,6 @@ configure: failed program was:
 | #define HAVE_PTHREAD_H 1
 | #define HAVE_STROPTS_H 1
 | #define TIME_WITH_SYS_TIME 1
-| #define t_scalar_t int32_t
 | /* end confdefs.h.  */
 | 
 | #include <sys/types.h>
@@ -1380,7 +1246,7 @@ configure: failed program was:
 | }
 configure:4800: gcc -c -g -O2 -D_REENTRANT  conftest.c >&5
 configure: In function 'main':
-configure:4825:19: error: 'struct sockaddr' has no member named 'sa_len'
+configure:4824:19: error: 'struct sockaddr' has no member named 'sa_len'
 configure:4803: $? = 1
 configure: failed program was:
 | #line 4778 "configure"
@@ -1421,7 +1287,6 @@ configure: failed program was:
 | #define HAVE_PTHREAD_H 1
 | #define HAVE_STROPTS_H 1
 | #define TIME_WITH_SYS_TIME 1
-| #define t_scalar_t int32_t
 | /* end confdefs.h.  */
 | 
 | #include <sys/types.h>
@@ -1497,7 +1362,7 @@ configure:5792: $? = 0
 configure:5803: result: yes
 configure:5814: checking for struct sockaddr_dl
 configure:5843: gcc -c -g -O2 -D_REENTRANT  conftest.c >&5
-configure:5877:23: fatal error: net/if_dl.h: No such file or directory
+configure:5876:23: fatal error: net/if_dl.h: No such file or directory
 compilation terminated.
 configure:5846: $? = 1
 configure: failed program was:
@@ -1539,7 +1404,6 @@ configure: failed program was:
 | #define HAVE_PTHREAD_H 1
 | #define HAVE_STROPTS_H 1
 | #define TIME_WITH_SYS_TIME 1
-| #define t_scalar_t int32_t
 | #define HAVE_STRUCT_SOCKADDR_STORAGE 1
 | #define HAVE_MSGHDR_MSG_CONTROL 1
 | #define HAVE_STRUCT_IFREQ_IFR_MTU 1
@@ -1587,7 +1451,7 @@ configure:5970: checking for /dev/streams/xtiso/tcp
 configure:5981: result: no
 configure:5991: checking for bzero
 configure:6041: gcc -o conftest -g -O2 -D_REENTRANT   conftest.c -lpthread  >&5
-configure:6068:6: warning: conflicting types for built-in function 'bzero' [enabled by default]
+configure:6067:6: warning: conflicting types for built-in function 'bzero' [enabled by default]
 configure:6044: $? = 0
 configure:6047: test -s conftest
 configure:6050: $? = 0
@@ -1654,9 +1518,9 @@ configure:6890: $? = 0
 configure:6901: result: yes
 configure:6916: checking for kqueue
 configure:6966: gcc -o conftest -g -O2 -D_REENTRANT   conftest.c -lpthread  >&5
-/tmp/ccRYWXM5.o:(.data+0x0): undefined reference to `kqueue'
-/tmp/ccRYWXM5.o: In function `main':
-/home/liupeng/extend/book/UNP/example/unpv13e/configure:7020: undefined reference to `kqueue'
+/tmp/cclVwKOf.o:(.data+0x0): undefined reference to `kqueue'
+/tmp/cclVwKOf.o: In function `main':
+/home/liupeng/program/book/UNP/example/unpv13e/configure:7019: undefined reference to `kqueue'
 collect2: error: ld returned 1 exit status
 configure:6969: $? = 1
 configure: failed program was:
@@ -1698,7 +1562,6 @@ configure: failed program was:
 | #define HAVE_PTHREAD_H 1
 | #define HAVE_STROPTS_H 1
 | #define TIME_WITH_SYS_TIME 1
-| #define t_scalar_t int32_t
 | #define HAVE_STRUCT_SOCKADDR_STORAGE 1
 | #define HAVE_MSGHDR_MSG_CONTROL 1
 | #define HAVE_STRUCT_IFREQ_IFR_MTU 1
@@ -1767,9 +1630,9 @@ configure: failed program was:
 configure:6986: result: no
 configure:6916: checking for kevent
 configure:6966: gcc -o conftest -g -O2 -D_REENTRANT   conftest.c -lpthread  >&5
-/tmp/ccX2UoKd.o:(.data+0x0): undefined reference to `kevent'
-/tmp/ccX2UoKd.o: In function `main':
-/home/liupeng/extend/book/UNP/example/unpv13e/configure:7020: undefined reference to `kevent'
+/tmp/cc7ZIskp.o:(.data+0x0): undefined reference to `kevent'
+/tmp/cc7ZIskp.o: In function `main':
+/home/liupeng/program/book/UNP/example/unpv13e/configure:7019: undefined reference to `kevent'
 collect2: error: ld returned 1 exit status
 configure:6969: $? = 1
 configure: failed program was:
@@ -1811,7 +1674,6 @@ configure: failed program was:
 | #define HAVE_PTHREAD_H 1
 | #define HAVE_STROPTS_H 1
 | #define TIME_WITH_SYS_TIME 1
-| #define t_scalar_t int32_t
 | #define HAVE_STRUCT_SOCKADDR_STORAGE 1
 | #define HAVE_MSGHDR_MSG_CONTROL 1
 | #define HAVE_STRUCT_IFREQ_IFR_MTU 1
@@ -1898,7 +1760,7 @@ configure:7227: $? = 0
 configure:7238: result: yes
 configure:7252: checking for snprintf
 configure:7302: gcc -o conftest -g -O2 -D_REENTRANT   conftest.c -lpthread  >&5
-configure:7343:6: warning: conflicting types for built-in function 'snprintf' [enabled by default]
+configure:7342:6: warning: conflicting types for built-in function 'snprintf' [enabled by default]
 configure:7305: $? = 0
 configure:7308: test -s conftest
 configure:7311: $? = 0
@@ -1911,7 +1773,7 @@ configure:7395: $? = 0
 configure:7406: result: yes
 configure:7420: checking for vsnprintf
 configure:7470: gcc -o conftest -g -O2 -D_REENTRANT   conftest.c -lpthread  >&5
-configure:7513:6: warning: conflicting types for built-in function 'vsnprintf' [enabled by default]
+configure:7512:6: warning: conflicting types for built-in function 'vsnprintf' [enabled by default]
 configure:7473: $? = 0
 configure:7476: test -s conftest
 configure:7479: $? = 0
@@ -1919,7 +1781,7 @@ configure:7490: result: yes
 configure:7502: checking for IPv4 support
 configure:7533: gcc -o conftest -g -O2 -D_REENTRANT   conftest.c -lpthread  >&5
 configure: In function 'main':
-configure:7595:3: warning: incompatible implicit declaration of built-in function 'exit' [enabled by default]
+configure:7594:3: warning: incompatible implicit declaration of built-in function 'exit' [enabled by default]
 configure:7536: $? = 0
 configure:7538: ./conftest
 configure:7541: $? = 0
@@ -1927,7 +1789,7 @@ configure:7556: result: yes
 configure:7571: checking for IPv6 support
 configure:7602: gcc -o conftest -g -O2 -D_REENTRANT   conftest.c -lpthread  >&5
 configure: In function 'main':
-configure:7666:3: warning: incompatible implicit declaration of built-in function 'exit' [enabled by default]
+configure:7665:3: warning: incompatible implicit declaration of built-in function 'exit' [enabled by default]
 configure:7605: $? = 0
 configure:7607: ./conftest
 configure:7610: $? = 0
@@ -1935,7 +1797,7 @@ configure:7625: result: yes
 configure:7640: checking for Unix domain sockets
 configure:7671: gcc -o conftest -g -O2 -D_REENTRANT   conftest.c -lpthread  >&5
 configure: In function 'main':
-configure:7737:3: warning: incompatible implicit declaration of built-in function 'exit' [enabled by default]
+configure:7736:3: warning: incompatible implicit declaration of built-in function 'exit' [enabled by default]
 configure:7674: $? = 0
 configure:7676: ./conftest
 configure:7679: $? = 0
@@ -1943,7 +1805,7 @@ configure:7694: result: yes
 configure:7709: checking for multicast support
 configure:7743: gcc -o conftest -g -O2 -D_REENTRANT   conftest.c -lpthread  >&5
 configure: In function 'main':
-configure:7807:15: warning: incompatible implicit declaration of built-in function 'exit' [enabled by default]
+configure:7806:15: warning: incompatible implicit declaration of built-in function 'exit' [enabled by default]
 configure:7746: $? = 0
 configure:7748: ./conftest
 configure:7751: $? = 0
@@ -2093,7 +1955,7 @@ ac_cv_type_struct_if_nameindex=yes
 ac_cv_type_struct_sockaddr_dl=no
 ac_cv_type_struct_sockaddr_storage=yes
 ac_cv_type_struct_timespec=yes
-ac_cv_type_t_scalar_t=no
+ac_cv_type_t_scalar_t=yes
 ac_cv_type_t_uscalar_t=yes
 ac_cv_type_uint16_t=yes
 ac_cv_type_uint32_t=yes
@@ -2246,6 +2108,5 @@ target_alias=''
 #define TIME_WITH_SYS_TIME 1
 #define UNIXDOMAIN 1
 #define UNIXdomain 1
-#define t_scalar_t int32_t
 
 configure: exit 0

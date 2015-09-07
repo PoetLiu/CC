@@ -311,7 +311,7 @@
 /* #undef ssize_t */
 
 /* scalar type */
-#define t_scalar_t int32_t
+/* #undef t_scalar_t */
 
 /* unsigned scalar type */
 /* #undef t_uscalar_t */
