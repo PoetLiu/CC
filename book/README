@@ -1,0 +1,11 @@
+These files are use to exercise while reading a programming book
+book list
+format: ID dir cn_name
+#1 UUP	unix/linux编程实践教程
+#2 POC	c和指针
+#3 CP	c++ primer
+#4 LLL  程序员的自我修养-链接、装载与库
+#5 UNP  unix网络编程1
+#6 APUE unix环境高级编程
+#7 CSAPP 深入理解计算机系统
+

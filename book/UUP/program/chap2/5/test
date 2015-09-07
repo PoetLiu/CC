@@ -1,0 +1,6 @@
+total 20
+drwxr-xr-x 2 liupeng liupeng 4096 Dec  1 15:59 .
+drwxr-xr-x 3 liupeng liupeng 4096 Dec  1 14:26 ..
+-rwxr-xr-x 1 liupeng liupeng 6531 Dec  1 15:59 a.out
+-rw-r--r-- 1 liupeng liupeng 1699 Dec  1 15:59 tail.c
+-rw-r--r-- 1 liupeng liupeng    0 Dec  1 15:59 test
