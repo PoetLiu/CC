@@ -1,5 +1,6 @@
 #include "locker_pthread.h"
 #include "list.h"
+#include "mem.h"
 #include <pthread.h>
 #include <stdlib.h>
 
@@ -43,5 +44,6 @@ static int locker_pthread_destroy(Locker *thiz)
 {
 	PrivInfo *priv	= (PrivInfo *)thiz->priv;
 	int ret = pthread_mutex_destroy(&priv->mutex);
+	SAFE_FREE(thiz);
 	return ret == 0 ? RET_OK : RET_FAIL;
 }

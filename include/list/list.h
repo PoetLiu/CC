@@ -40,7 +40,7 @@ typedef int(*NODE_HANDLE)(void *);
 typedef int(*NODE_SORT_HANDLE)(void *, void *, const int);
 typedef int(*NODE_VISIT_HANDLE)(void *, void *);
 
-inline PNode dlist_head_init(PNode, LOCKER_CREATE);
+inline PNode dlist_head_init(PNode, Locker *);
 inline PNode dlist_add_new(const PNode, void *data);
 inline PNode dlist_add_tail_new(const PNode, void *data);
 inline int dlist_empty(const PNode const);

@@ -20,27 +20,112 @@ struct _Node
 	void		*data;
 };
 
-static struct Locker *dlist_lock;
+typedef int (*TaskSelfFunc)(void);
+typedef struct _PrivInfo
+{
+	int owner;
+	int ref_count;
+	Locker *real_locker;
+	TaskSelfFunc task_self;
+}PrivInfo;
+
+
+static Locker *dlist_lock;
 
 static inline int locker_lock(Locker *thiz)
 {
-	P_VALID_CHECK_RET(thiz, -1);
-	P_VALID_CHECK_RET(thiz->lock, -1);
-	return thiz->lock(thiz);
+	return thiz && thiz->lock ? thiz->lock(thiz) : -1;
 }
 
 static inline int locker_unlock(Locker *thiz)
 {
-	P_VALID_CHECK_RET(thiz, -1);
-	P_VALID_CHECK_RET(thiz->unlock, -1);
-	return thiz->unlock(thiz);
+	return thiz && thiz->unlock ? thiz->unlock(thiz) : -1;
 }
 
 static inline int locker_destroy(Locker *thiz)
 {
-	P_VALID_CHECK_RET(thiz, -1);
-	P_VALID_CHECK_RET(thiz->destroy, -1);
-	return thiz->destroy(thiz);
+	return thiz && thiz->destroy ? thiz->destroy(thiz) : -1;
+}
+
+static int locker_nest_lock(Locker *locker)
+{
+	PrivInfo *priv = NULL;
+	int ret = 0;
+
+	P_VALID_CHECK_RET(locker, -1);
+	priv	= (PrivInfo *)locker->priv;
+
+	if (priv->owner) {
+		if (priv->owner == priv->task_self())
+			priv->ref_count++;
+		else 
+			return -1;
+	} else {
+		if ((ret = locker_lock(priv->real_locker)) == 0) {
+			priv->owner	= priv->task_self();
+			priv->ref_count++;
+		}
+	}
+
+	return ret;
+}
+
+static int locker_nest_unlock(Locker *locker)
+{
+	PrivInfo *priv = NULL;
+
+	P_VALID_CHECK_RET(locker, -1);
+	priv	= (PrivInfo *)locker->priv;
+
+	if (priv->owner == 0 || priv->ref_count == 0)
+		return -1;
+
+	if (priv->owner != priv->task_self())
+		return -2;
+
+	priv->ref_count--;
+	if (priv->ref_count == 0) {
+		priv->owner	= 0;
+		return locker_unlock(priv->real_locker);
+	}
+
+	return 0;
+}
+
+static int locker_nest_destroy(Locker *locker)
+{
+	PrivInfo *priv = NULL;
+
+	P_VALID_CHECK_RET(locker, -1);
+	priv	= (PrivInfo *)locker->priv;
+	locker_destroy(priv->real_locker);
+	SAFE_FREE(locker);
+
+	return 0;
+}
+
+static Locker *locker_nest_create(Locker *real_locker, TaskSelfFunc task_self)
+{
+	Locker *locker = NULL;
+	PrivInfo *priv = NULL;
+
+	P_VALID_CHECK_RET(real_locker, NULL);
+	P_VALID_CHECK_RET(task_self, NULL);
+
+	locker	= malloc(sizeof(Locker) + sizeof(PrivInfo));
+	P_VALID_CHECK_RET(locker, NULL);
+
+	locker->lock	= locker_nest_lock;
+	locker->unlock	= locker_nest_unlock;
+	locker->destroy	= locker_nest_destroy;
+
+	priv	= (PrivInfo *)locker->priv;
+	priv->owner		= 0;
+	priv->ref_count		= 0;
+	priv->real_locker	= real_locker;
+	priv->task_self		= task_self;
+	
+	return locker;
 }
 
 /*
@@ -220,15 +305,14 @@ inline PNode dlist_add_tail_new(PNode head, void *data)
  * return	: NULL if error
  * 		  value of head if success
 **/
-inline PNode dlist_head_init(PNode head, LOCKER_CREATE create)
+inline PNode dlist_head_init(PNode head, Locker *locker)
 {
 	PNode _head = head ? head : dlist_node_new(NULL);
 
 	P_VALID_CHECK_RET(_head, NULL);
-	if (create) {
-		dlist_lock	= create();
-		P_VALID_CHECK_RET(dlist_lock, NULL);
-	}
+	if (locker)
+		dlist_lock	= locker;
+	
 	_head->prev 	= _head;
 	_head->next	= _head;
 	return _head;
@@ -315,6 +399,9 @@ inline int dlist_destory(const PNode head, const NODE_HANDLE node_del)
 	list_for_each_node_safe(head, del, next) {
 		dlist_del(del, node_del);
 	}
+
+	if (dlist_lock)
+		locker_destroy(dlist_lock);
 	return 0;
 }
 
@@ -334,7 +421,6 @@ inline int dlist_del_by_filter(PNode head, NODE_HANDLE node_del, NODE_HANDLE fil
 			dlist_del(del, node_del);
 	}
 	return 0;
-
 }
 
 /*
