@@ -20,7 +20,7 @@ $(TARGET): $(OBJS)
 	$(CC) -c $< -o $@ $(CFLAGS) $(INCLUDE_DIRS)
  
 clean:
-	rm -rf *.o $(TARGET)
+	rm -rf *.o $(TARGET) $(CLEAN_OBJ)
 
 tar: clean
 	rm -rf $(TARGET).tar.gz
