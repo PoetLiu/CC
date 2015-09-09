@@ -20,16 +20,6 @@ struct _Node
 	void		*data;
 };
 
-typedef int (*TaskSelfFunc)(void);
-typedef struct _PrivInfo
-{
-	int owner;
-	int ref_count;
-	Locker *real_locker;
-	TaskSelfFunc task_self;
-}PrivInfo;
-
-
 static Locker *dlist_lock;
 
 static inline int locker_lock(Locker *thiz)
@@ -47,6 +37,25 @@ static inline int locker_destroy(Locker *thiz)
 	return thiz && thiz->destroy ? thiz->destroy(thiz) : -1;
 }
 
+/***************************** 嵌套锁的实现。开始 ***************************/
+typedef int (*TaskSelfFunc)(void);
+typedef struct _PrivInfo
+{
+	int owner;
+	int ref_count;
+	Locker *real_locker;
+	TaskSelfFunc task_self;
+}PrivInfo;
+/* 这里的嵌套锁， 只允许同一个线程多次加锁、解锁.
+ * 进行加锁、解锁操作时， 判断了这个线程是否是锁
+ * 的拥有者（如果已经被加锁）。owner 和 ref_count
+ * 的值，在多次加锁、解锁过程中， 只允许被同一个
+ * 线程操作。如果一个线程已经加了锁， 其他线程只能
+ * 等待不存在资源竞争的情况。所以这里的owner
+ * 和 ref_count都是线程安全的。
+ *
+ * */
+
 static int locker_nest_lock(Locker *locker)
 {
 	PrivInfo *priv = NULL;
@@ -55,15 +64,13 @@ static int locker_nest_lock(Locker *locker)
 	P_VALID_CHECK_RET(locker, -1);
 	priv	= (PrivInfo *)locker->priv;
 
-	if (priv->owner) {
-		if (priv->owner == priv->task_self())
-			priv->ref_count++;
-		else 
-			return -1;
+	if (priv->owner == priv->task_self()) {
+		priv->ref_count++;
 	} else {
+		// Update owner and ref_count ONLY after a successfully lock call.
 		if ((ret = locker_lock(priv->real_locker)) == 0) {
 			priv->owner	= priv->task_self();
-			priv->ref_count++;
+			priv->ref_count	= 1;
 		}
 	}
 
@@ -127,6 +134,110 @@ static Locker *locker_nest_create(Locker *real_locker, TaskSelfFunc task_self)
 	
 	return locker;
 }
+/***************************** 嵌套锁实现， 结束。*****************************/
+
+/***************************** 读写锁实现， 开始。*****************************/
+struct _RwLocker;
+typedef struct _RwLocker RwLocker;
+struct _RwLocker {
+	int mode;
+	int readers;
+	Locker *rw_locker;	// 读/写 操作的锁
+	Locker *rd_locker;	// readers(读引用计数的锁)
+	TaskSelfFunc task_self;
+};
+/* 
+ * 这里对读引用计数readers设置了独立的锁， rw_locker. 原因如下：
+ * 允许多个线程同时加读锁， 和解读锁，那么readers将属于共享资源,
+ * 也就允许多个线程都可能读取、修改readers的值。线程之间的资源
+ * 竞争可能造成严重的混乱。 并且这里加读锁、解读锁都将依赖于readers
+ * 的值进行操作，所以， 这里单独设置锁是必然的。
+ * */
+
+enum RW_LOCKER_MODE {
+	RW_LOCKER_NONE,
+	RW_LOCKER_RD,
+	RW_LOCKER_WR,
+};
+
+RwLocker *rw_locker_create(Locker *rw_locker, Locker *rd_locker)
+{
+	RwLocker *thiz = NULL;
+
+	P_VALID_CHECK_RET(rw_locker, NULL);
+	P_VALID_CHECK_RET(rd_locker, NULL);
+
+	thiz	= (RwLocker*)malloc(sizeof(RwLocker));
+	if (thiz != NULL) {
+		thiz->readers	= 0;
+		thiz->mode	= RW_LOCKER_NONE;
+		thiz->rw_locker	= rw_locker;
+		thiz->rd_locker	= rd_locker;
+	}
+	return thiz;
+}
+
+static int rw_locker_wrlock(RwLocker *thiz)
+{
+	int ret = 0;
+	P_VALID_CHECK_RET(thiz, -1);
+
+	if ((ret = locker_lock(thiz->rw_locker)) == 0)
+		thiz->mode	= RW_LOCKER_WR;
+	return ret;
+}
+
+static int rw_locker_rdlock(RwLocker *thiz)
+{
+	int ret = 0;
+
+	P_VALID_CHECK_RET(thiz, -1);
+	
+	if ((ret = locker_lock(thiz->rd_locker)) == 0) {
+		thiz->readers++;
+		if (thiz->readers == 0) {
+			ret	= locker_lock(thiz->rw_locker);
+			thiz->mode	= RW_LOCKER_RD;
+		}
+		locker_unlock(thiz->rd_locker);	
+	}
+	return ret;
+}
+
+static int rw_locker_unlock(RwLocker *thiz)
+{
+	int ret = 0;
+
+	P_VALID_CHECK_RET(thiz, -1);
+
+	if (thiz->mode == RW_LOCKER_WR) {
+		thiz->mode	= RW_LOCKER_NONE;
+		ret	= locker_unlock(thiz->rw_locker);
+	} else if (thiz->mode == RW_LOCKER_RD){
+		if ((ret = locker_lock(thiz->rd_locker)) == 0) {
+			thiz->readers--;
+			if (thiz->readers == 0) {
+				thiz->mode	= RW_LOCKER_NONE;	
+				ret	= locker_unlock(thiz->rw_locker);
+			}
+			locker_unlock(thiz->rd_locker);
+		}
+	} else {
+		ret = -1;	
+	}
+
+	return ret;
+}
+
+void rw_locker_destroy(RwLocker *thiz)
+{
+	P_VALID_CHECK_ACT(thiz, return);
+	locker_destroy(thiz->rd_locker);
+	locker_destroy(thiz->rw_locker);
+	SAFE_FREE(thiz);
+	return ;
+}
+/***************************** 读写锁实现， 结束。*****************************/
 
 /*
  * Funcion	: check whether sort type valid
@@ -310,9 +421,6 @@ inline PNode dlist_head_init(PNode head, Locker *locker)
 	PNode _head = head ? head : dlist_node_new(NULL);
 
 	P_VALID_CHECK_RET(_head, NULL);
-	if (locker)
-		dlist_lock	= locker;
-	
 	_head->prev 	= _head;
 	_head->next	= _head;
 	return _head;
@@ -400,8 +508,6 @@ inline int dlist_destory(const PNode head, const NODE_HANDLE node_del)
 		dlist_del(del, node_del);
 	}
 
-	if (dlist_lock)
-		locker_destroy(dlist_lock);
 	return 0;
 }
 
