@@ -214,7 +214,7 @@ static void _darray_sort_quick(void **data, size_t left, size_t right, DataCompa
 	data[left]	= key;
 	if (save_left < left)
 		_darray_sort_quick(data, save_left, left - 1, cmp, type);
-	if (save_right < left)
+	if (save_right > left)
 		_darray_sort_quick(data, left + 1, save_right, cmp, type);
 
 	return;
