@@ -5,6 +5,7 @@
 #define DATA_OUT	"data.out"
 #define DATA_MAX	10000000
 #define DATA_NUM	1000000
-#define BITMAP_SIZE	(DATA_MAX/8)
+#define BITSPERWORD	8
+#define BITMAP_SIZE	(1+DATA_MAX/BITSPERWORD)
 
 #endif

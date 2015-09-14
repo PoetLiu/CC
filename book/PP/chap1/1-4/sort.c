@@ -20,6 +20,23 @@ enum SORT_TYPE {
 	SORT_TYPE_DESC,
 };
 
+#define SHIFT	3
+#define MASK	0x7	
+static inline void bit_set(bitmap_t *map, int i)
+{ 
+	map[i>>SHIFT]	|= (1 << (i & MASK)); 
+}
+
+static inline void bit_clr(bitmap_t *map, int i)
+{ 
+	map[i>>SHIFT]	&= ~(1 << (i & MASK)); 
+}
+
+static inline int bit_test(bitmap_t *map, int i)
+{ 
+	return map[i>>SHIFT] & (1 << (i & MASK)); 
+}
+
 static bitmap_t * bitmap_init(int size)
 {
 	uint8_t *map = NULL;
@@ -36,14 +53,12 @@ static bitmap_t * bitmap_init(int size)
 
 static int bitmap_set(bitmap_t *map, int bit_num)
 {
-	int i = 0; 
 	P_VALID_CHECK_RET(map, -1);
 	if (bit_num > DATA_MAX || bit_num < 0) {
 		DEBUG("invalid bit vaule:%d\n", bit_num);	
 		return -1;
 	}
-	i	= bit_num / 8;
-	map[i]	= map[i] | (1 << (8 - bit_num % 8));
+	bit_set(map, bit_num);
 
 	return 0;
 }
@@ -55,8 +70,7 @@ static int bitmap_is_set(bitmap_t *map, int bit_num)
 		DEBUG("invalid bit vaule:%d\n", bit_num);	
 		return -1;
 	}
-	return map[bit_num/8] | (1 << (8 - bit_num % 8));
-
+	return bit_test(map, bit_num);
 }
 
 static int bitmap_create(char *path, bitmap_t *map)
@@ -133,11 +147,10 @@ static int bitmap_destroy(bitmap_t **map)
 int main(void)
 {
 	bitmap_t *map = NULL;
-
 	map	= bitmap_init(BITMAP_SIZE);
 	P_VALID_CHECK_RET(map, -1);
 	bitmap_create(DATA_IN, map);
-	bitmap_print(DATA_OUT, SORT_TYPE_ASC, map);
+	bitmap_print(DATA_OUT, SORT_TYPE_DESC, map);
 	bitmap_destroy(&map);
 
 	return 0;

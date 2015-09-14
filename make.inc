@@ -11,7 +11,7 @@ INCLUDE_DIRS+= -I$(PROG)/include/queue
 
 .PHONY: clean all tar $(DEPEND)
 
-all: $(DEPEND) $(TARGET) 
+all: $(DEPEND) $(TARGET) $(ACT)
 
 $(TARGET): $(OBJS)
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) $(LIBS)
