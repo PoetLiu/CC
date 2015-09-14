@@ -11,7 +11,7 @@ typedef DataVisitFunc DataPrintFunc;
  * */
 typedef int (*DataCompareFunc)(void *ldata, void *rdata);
 
-DArray* darray_create(DataDestroyFunc data_destroy, DataPrintFunc print, void* ctx);
+DArray* darray_create(DataDestroyFunc data_destroy, DataCompareFunc cmp, DataPrintFunc print, void* ctx);
 int darray_insert(DArray* thiz, size_t index, void* data);
 int darray_prepend(DArray* thiz, void* data);
 int darray_append(DArray* thiz, void* data);
@@ -19,11 +19,12 @@ int darray_delete(DArray* thiz, size_t index);
 int darray_get_by_index(DArray* thiz, size_t index, void** data);
 int darray_set_by_index(DArray* thiz, size_t index, void* data);
 size_t darray_length(DArray* thiz);
-int darray_find(DArray* thiz, DataVisitFunc cmp, void* ctx);
+int darray_find(DArray* thiz, void* data);
 int darray_foreach(DArray* thiz, DataVisitFunc visit, void* ctx);
 int darray_print(DArray *thiz);
+int darray_unique_print(DArray *thiz);
 void darray_destroy(DArray* thiz);
-int darray_sort(DArray *thiz, DataCompareFunc cmp, int type, int method);
+int darray_sort(DArray *thiz, int type, int method);
 
 enum SORT_TYPE {
 	SORT_TYPE_ASC,	// 升序

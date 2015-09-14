@@ -8,6 +8,7 @@ struct _DArray {
 	size_t size;
 	size_t alloc_size;
 	DataDestroyFunc destroy;
+	DataCompareFunc cmp;
 	DataPrintFunc print;
 	void **data;
 };
@@ -54,15 +55,53 @@ int darray_foreach(DArray *thiz, DataVisitFunc visit, void *ctx)
 
 int darray_print(DArray *thiz)
 {
-	return thiz && thiz->print ? darray_foreach(thiz, thiz->print, NULL) : -1;
+	int i = 0, is_end = 0;
+
+	P_VALID_CHECK_RET(thiz, -1);
+	P_VALID_CHECK_RET(thiz->print, -1);
+
+	for (i = 0; i < thiz->size; i++) { 
+		is_end	= (i == (thiz->size - 1));
+		thiz->print(thiz->data[i], &is_end);
+	}
+	
+	return 0;
 }
 
-int darray_find(DArray* thiz, DataVisitFunc visit, void* ctx)
+int darray_unique_print(DArray *thiz)
 {
-	return thiz && visit ? darray_foreach(thiz, visit, ctx) : -1;
+	void *ctx = NULL;
+	int i = 0, is_end = 0;
+
+	P_VALID_CHECK_RET(thiz, -1);
+	P_VALID_CHECK_RET(thiz->print, -1);
+	P_VALID_CHECK_RET(thiz->cmp, -1);
+	ctx	= thiz->data[0];
+	for (i = 0; i < thiz->size; i++) { 
+		if ((thiz->cmp(thiz->data[i], ctx) == RES_EQUAL) && i != 0) 
+			continue;
+		ctx	= thiz->data[i];
+		is_end	= (i == thiz->size - 1 ? 1 : 0);
+		thiz->print(thiz->data[i], &is_end);
+	}
+	
+	return 0;
 }
 
-DArray* darray_create(DataDestroyFunc data_destroy, DataPrintFunc print, void *ctx)
+int darray_find(DArray* thiz, void* data)
+{
+	int i = 0;
+	P_VALID_CHECK_RET(thiz, -1);
+	P_VALID_CHECK_RET(data, -1);
+
+	for (i = 0; i < thiz->size; i++)
+		if (thiz->data[i] == data)
+			return i;
+	return -1;
+}
+
+DArray* darray_create(DataDestroyFunc data_destroy, DataCompareFunc cmp, 
+		DataPrintFunc print, void *ctx)
 {
 	DArray *new = NULL;
 	P_VALID_CHECK_RET(data_destroy, NULL);
@@ -72,6 +111,7 @@ DArray* darray_create(DataDestroyFunc data_destroy, DataPrintFunc print, void *c
 	new->size	= 0;
 	new->destroy	= data_destroy;
 	new->print	= print;
+	new->cmp	= cmp;
 	if (darray_expand(new, MIN_PRE_ALLOCATE_NR) != 0) {
 		SAFE_FREE(new);	
 		return NULL;
@@ -229,17 +269,17 @@ static int darray_sort_quick(DArray *thiz, DataCompareFunc cmp, int type)
 	return 0;
 }
 
-int darray_sort(DArray *thiz, DataCompareFunc cmp, int type, int method)
+int darray_sort(DArray *thiz, int type, int method)
 {
 	P_VALID_CHECK_RET(thiz, -1);
-	P_VALID_CHECK_RET(cmp, -1);
+	P_VALID_CHECK_RET(thiz->cmp, -1);
 
 	switch (method) {
 		case SORT_METHOD_QK:
-			return darray_sort_quick(thiz, cmp, type);
+			return darray_sort_quick(thiz, thiz->cmp, type);
 			break;
 		case SORT_METHOD_BUBBLE:
-			return darray_sort_bubble(thiz, cmp, type);
+			return darray_sort_bubble(thiz, thiz->cmp, type);
 		case SORT_METHOD_MERGE:
 			break;
 		default:
@@ -248,3 +288,31 @@ int darray_sort(DArray *thiz, DataCompareFunc cmp, int type, int method)
 	}
 	return 0;
 }
+
+int darray_qsearch(DArray *thiz, void *data)
+{
+	int start = 0, end = 0, mid = 0, result = 0;
+
+	P_VALID_CHECK_RET(thiz, -1);
+	P_VALID_CHECK_RET(thiz->cmp, -1);
+	P_VALID_CHECK_RET(data, -1);
+
+	if (thiz->size == 0)
+		return -1;
+
+	end	= thiz->size - 1;
+	while (start <= end) {
+		mid	= start + ((end - start) >> 1);
+		result	= thiz->cmp(data, thiz->data[mid]);
+
+		if (result == RES_GTR) 
+			start	= mid + 1;
+		else if (result == RES_LT)
+			end	= mid - 1;
+		else
+			return mid;
+	}
+
+	return -1;
+}
+
