@@ -341,7 +341,7 @@ static inline int __dlist_del(const PNode prev, const PNode next)
  * return	: -1, if err
  * 		  0, if success
 **/
-static inline int dlist_del(PNode del, NODE_HANDLE node_del)
+static inline int dlist_del(PNode del, NODE_HANDLE node_del, void *ctx)
 {
 	P_VALID_CHECK_RET(del, -1);
 
@@ -351,7 +351,7 @@ static inline int dlist_del(PNode del, NODE_HANDLE node_del)
 	del->next	= NULL;	
 
 	if (!IS_NULL(node_del))
-		node_del(del->data);
+		node_del(del->data, ctx);
 
 	SAFE_FREE(del);
 	return 0;
@@ -411,6 +411,16 @@ inline PNode dlist_add_tail_new(PNode head, void *data)
 	return dlist_add_tail(head, new);
 }
 
+inline int dlist_append(PNode head, void *data)
+{
+	return dlist_add_tail_new(head, data) == NULL ? -1 : 0;
+}
+
+inline int dlist_prepend(PNode head, void *data)
+{
+	return dlist_add_new(head, data) == NULL ? -1 : 0;
+}
+
 /*
  * Funcion	: init a list head
  * return	: NULL if error
@@ -426,13 +436,18 @@ inline PNode dlist_head_init(PNode head, Locker *locker)
 	return _head;
 }
 
+inline PNode dlist_create(void)
+{
+	return dlist_head_init(NULL, NULL);
+}
+
 /*
  * Funcion	: count num of lists node
  * arguments	: head, list head
  * return	: 0, empty
  * 		  >0, not empty
 **/
-inline int dlist_size(const PNode const head)
+inline int dlist_length(const PNode const head)
 {
 	size_t	size = 0;
 	PNode	node = NULL;
@@ -495,7 +510,7 @@ inline int dlist_empty(const PNode const head)
  * return	: -1, if err
  * 		  0, if success
 **/
-inline int dlist_destory(const PNode head, const NODE_HANDLE node_del)
+inline int dlist_destroy(const PNode head, const NODE_HANDLE node_del, void *ctx)
 {
 	PNode next = NULL, del = NULL;
 
@@ -505,13 +520,13 @@ inline int dlist_destory(const PNode head, const NODE_HANDLE node_del)
 		return 0;
 
 	list_for_each_node_safe(head, del, next) {
-		dlist_del(del, node_del);
+		dlist_del(del, node_del, ctx);
 	}
 
 	return 0;
 }
 
-inline int dlist_del_by_filter(PNode head, NODE_HANDLE node_del, NODE_HANDLE filter)
+inline int dlist_del_by_filter(PNode head, NODE_HANDLE node_del, void *ctx, NODE_FILTER filter)
 {
 	PNode next = NULL, del = NULL;
 
@@ -524,7 +539,7 @@ inline int dlist_del_by_filter(PNode head, NODE_HANDLE node_del, NODE_HANDLE fil
 
 	list_for_each_node_safe(head, del, next) {
 		if (filter(del->data))
-			dlist_del(del, node_del);
+			dlist_del(del, node_del, ctx);
 	}
 	return 0;
 }
@@ -570,3 +585,25 @@ inline int dlist_print(const PNode const head, NODE_VISIT_HANDLE visit)
 {
 	return dlist_foreach(head, visit, NULL);
 }
+
+inline PNode dlist_find(const PNode const head, NODE_HANDLE cmp, void *ctx)
+{
+	PNode node = NULL, next = NULL;
+
+	P_VALID_CHECK_RET(head, NULL);
+	P_VALID_CHECK_RET(cmp, NULL);
+
+	if (dlist_empty(head)) {
+		printf("empty list\n");
+		return 0;
+	}
+
+	list_for_each_node_safe(head, node, next) {
+		if (cmp(ctx, node->data))
+			return node;
+	}
+
+	return 0;
+}
+
+

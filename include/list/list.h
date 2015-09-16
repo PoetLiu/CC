@@ -15,6 +15,7 @@
 struct _Node;
 typedef struct _Node* PNode;
 typedef struct _Node Node;
+typedef struct _Node Dlist;
 
 struct _Locker;
 typedef struct _Locker Locker;
@@ -36,21 +37,26 @@ enum {
 	DLIST_SORT_DESC,	// 降序排列
 }DLIST_SORT_ORDER;
 
-typedef int(*NODE_HANDLE)(void *);
+typedef int(*NODE_FILTER)(void *);
+typedef int(*NODE_HANDLE)(void *, void *);
 typedef int(*NODE_SORT_HANDLE)(void *, void *, const int);
-typedef int(*NODE_VISIT_HANDLE)(void *, void *);
+typedef NODE_HANDLE NODE_VISIT_HANDLE;
 
+inline PNode dlist_create(void);
 inline PNode dlist_head_init(PNode, Locker *);
 inline PNode dlist_add_new(const PNode, void *data);
 inline PNode dlist_add_tail_new(const PNode, void *data);
+inline int dlist_append(const PNode, void *data);
+inline int dlist_prepend(const PNode, void *data);
 inline int dlist_empty(const PNode const);
-inline int dlist_destory(const PNode, NODE_HANDLE);
-inline int dlist_size(const PNode const);
+inline int dlist_length(const PNode const);
+inline int dlist_destroy(const PNode, NODE_HANDLE, void *);
 inline int dlist_sort(const PNode, const NODE_SORT_HANDLE, const int);
 inline int dlist_find_max(const PNode const, NODE_VISIT_HANDLE, void *);
 inline int dlist_sum(const PNode const, NODE_VISIT_HANDLE, void *);
 inline int dlist_print(const PNode const, NODE_VISIT_HANDLE);
 inline int dlist_foreach(const PNode const, NODE_VISIT_HANDLE, void *);
-inline int dlist_del_by_filter(PNode, NODE_HANDLE, NODE_HANDLE);
+inline int dlist_del_by_filter(PNode, NODE_HANDLE, void *, NODE_FILTER);
+inline PNode dlist_find(const PNode const head, NODE_HANDLE cmp, void *ctx);
 
 #endif	// _LIST_H

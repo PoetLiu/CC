@@ -12,7 +12,7 @@ struct node_data {
 	char *buf;
 };
 
-static int free_data(void *data)
+static int free_data(void *data, void *ctx)
 {
 	SAFE_FREE(data);
 	return 0;
@@ -133,7 +133,7 @@ int main(void)
 
 	head	= dlist_head_init(NULL, NULL);
 	
-	for (i = 0; i < GET_ARRAY_SIZE(p); i++) {
+	for (i = 0; i < ARRAY_SIZE_GET(p); i++) {
 		data	= node_data_new(p[i], strlen(p[i])+1);	
 		if (data == NULL) {
 			DEBUG("get_node faild\n");
@@ -147,12 +147,12 @@ int main(void)
 	dlist_print(head, print_data); 
 	dlist_sum(head, node_sum, &sum);
 	dlist_find_max(head, node_max, &max); 
-	DEBUG("list size %d, total len:%d, max len:%d\n", dlist_size(head), sum, max);
+	DEBUG("list size %d, total len:%d, max len:%d\n", dlist_length(head), sum, max);
 
 	DEBUG("deleting node len < 3\n");
-	dlist_del_by_filter(head, free_data, data_filter);
+	dlist_del_by_filter(head, free_data, NULL, data_filter);
 	dlist_sum(head, node_sum, &sum);
-	DEBUG("list size %d, total len:%d\n", dlist_size(head), sum);
+	DEBUG("list size %d, total len:%d\n", dlist_length(head), sum);
 
 	dlist_print(head, print_data);
 
@@ -160,7 +160,7 @@ int main(void)
 	dlist_foreach(head, lower_2_upper, NULL);
 	dlist_print(head, print_data);
 
-	dlist_destory(head, free_data);
+	dlist_destroy(head, free_data, NULL);
 
 	return 0;
 }
