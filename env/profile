@@ -22,7 +22,7 @@ if [ -d "$HOME/bin" ] ; then
 fi
 
 # 360 p1 branche
-PB="$HOME/extend/360/RTL-360-CustomSection/"
+PB="$HOME/extend/360/RTL-360-150812/"
 # No1 trunk user
 PBU="$PB/user"
 # No1 trunk app
