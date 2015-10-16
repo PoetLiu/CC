@@ -30,5 +30,6 @@ int main(void)
 	printf("%s\n", ch1);
 	printf("%s\n", ch1+1);
 	printf("%s\n", ch1+2);
+	printf("p1:%p p1+1:%p\n", p1, p1 + 1);
 	return 0;
 }
