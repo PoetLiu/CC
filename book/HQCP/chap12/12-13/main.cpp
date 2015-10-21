@@ -18,7 +18,7 @@ int main(void)
 	cout << "Color:" << pRect->GetColor() << endl;
 	pRect->Draw();
 	pRect->Destroy();
-	pRect = NULL;
+	pRect	= NULL;
 
 	return 0;
 }
