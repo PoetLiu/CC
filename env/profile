@@ -32,4 +32,9 @@ PBA="$PBU/app"
 PT="$HOME/extend/360/RTL-360/"
 PTU="$PT/user"
 
+# 360 p0 trunk
+P0="$HOME/extend/360/RTL-360-P0/"
+# p0 trunk user
+P0U="$P0/user"
+
 BOOK="$HOME/extend/book"
