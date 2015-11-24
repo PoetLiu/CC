@@ -155,7 +155,7 @@ int socket_init()
 
 	// 创建一个TCP的原始套接字
 	if (0 > (sk = socket(PF_PACKET, SOCK_RAW, htons(ETH_P_ALL)))) {
-		ERROR("socket create faild");
+		ERROR("socket create faild\n");
 		return -1;
 	}
 

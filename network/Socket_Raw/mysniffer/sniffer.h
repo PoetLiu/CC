@@ -22,23 +22,8 @@
 #include <pthread.h>
 #include "linux_list.h"
 #include "queue.h"
+#include "debug.h"
 
-#ifdef __DEBUG__
-#define DEBUG(fmt,args...) 										\
-	do {												\
-		printf("DEBUG:""%s:%s:%d "fmt, __FILE__, __FUNCTION__, __LINE__, ##args);		\
-	}while(0)
-
-#define ERROR(fmt,args...)										\
-	do {												\
-		char buf[1024];										\
-		snprintf(buf, sizeof(buf), "DEBUG:""%s:%s:%d "fmt, __FILE__, __FUNCTION__, __LINE__, ##args);	\
-		perror(buf);										\
-	}while(0)
-#else
-#define DEBUG(fmt,args...) do{}while(0)
-#define ERROR(fmt,args...) do{}while(0)
-#endif
 
 #ifndef __DISP_ALL
 #define DISP_MAC 0

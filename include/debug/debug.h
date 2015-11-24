@@ -2,11 +2,11 @@
 #define _DEBUG_H
 #define DEBUG(fmt, args...)	\
 	do {			\
-		printf("DEBUG:%s-%s-%d "fmt, __FILE__, __FUNCTION__, __LINE__, ##args);\
+		printf("DEBUG:%s-%d-%s: "fmt, __FILE__, __LINE__, __FUNCTION__, ##args);\
 	}while(0)
 
 #define ERROR(fmt, args...)	\
 	do {			\
-		printf("ERROR:%s-%s-%d "fmt, __FILE__, __FUNCTION__, __LINE__, ##args);\
+		printf("ERROR:%s-%d-%s: "fmt, __FILE__, __LINE__, __FUNCTION__, ##args);\
 	}while(0)
 #endif	// _DEBUG_H
