@@ -106,9 +106,9 @@ endfunction
 
 "cs add /home/liupeng/extend/360/RTL-360/user/cscope.out /home/liupeng/extend/360/RTL-360/user/
 
-"set tags+=/home/liupeng/extend/360/RTL-360/user/tags
+set tags+=/home/liupeng/extend/360/RTL-360/user/tags
 set tags+=/home/liupeng/extend/360/RTL-360/linux/linux/tags
-set tags+=/home/liupeng/extend/360/RTL-360-151118/user/tags
+"set tags+=/home/liupeng/extend/360/RTL-360-151118/user/tags
 "set tags+=/home/liupeng/extend/360/RTL-360-WIFI-SHARE/user/tags
 "set tags+=/home/liupeng/extend/360/RTL-360-P0/user/tags
 set tags+=/home/liupeng/extend/book/tags
