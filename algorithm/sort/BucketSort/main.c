@@ -1,3 +1,11 @@
+/*
+ *
+ * Authored by Liu Peng on: 2016年 10月 20日 星期四 16:12:32 CST
+ *
+ * @desc: 桶排序， 时间复杂度O（M+N）
+ *
+ * @func:
+**/
 #include <stdio.h>
 #include "debug.h"
 #include "mem.h"
