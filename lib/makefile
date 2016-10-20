@@ -9,3 +9,7 @@ SRC=$(foreach dir,$(DIRS),$(wildcard $(dir)/*.c))
 $(TARGET): $(PROG)/include $(SRC)
 	$(CC) -o $@ $(CFLAGS) -shared $(SRC)  -lm
 
+clean:
+	rm -rf $(TARGET)
+	
+

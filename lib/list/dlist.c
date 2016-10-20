@@ -447,7 +447,7 @@ inline PNode dlist_create(void)
  * return	: 0, empty
  * 		  >0, not empty
 **/
-inline int dlist_length(const PNode const head)
+inline int dlist_length(const PNode head)
 {
 	size_t	size = 0;
 	PNode	node = NULL;
@@ -497,7 +497,7 @@ inline int dlist_sort(const PNode head, const NODE_SORT_HANDLE sorter, const int
  * return	: 1, if empty
  * 		  0, if not empty 
 **/
-inline int dlist_empty(const PNode const head)
+inline int dlist_empty(const PNode head)
 {
 	P_VALID_CHECK_RET(head, 1);
 	return  head->next == head;
@@ -551,7 +551,7 @@ inline int dlist_del_by_filter(PNode head, NODE_HANDLE node_del, void *ctx, NODE
  * return	: -1, if err
  * 		  0, if success
 **/
-inline int dlist_foreach(const PNode const head, NODE_VISIT_HANDLE visit, void *ctx)
+inline int dlist_foreach(const PNode head, NODE_VISIT_HANDLE visit, void *ctx)
 {
 	PNode node = NULL, next = NULL;
 
@@ -570,23 +570,23 @@ inline int dlist_foreach(const PNode const head, NODE_VISIT_HANDLE visit, void *
 	return 0;
 }
 
-inline int dlist_find_max(const PNode const head, NODE_VISIT_HANDLE visit, void *ctx)
+inline int dlist_find_max(const PNode head, NODE_VISIT_HANDLE visit, void *ctx)
 {
 	return dlist_foreach(head, visit, ctx);
 }
 
-inline int dlist_sum(const PNode const head, NODE_VISIT_HANDLE visit, void *ctx)
+inline int dlist_sum(const PNode head, NODE_VISIT_HANDLE visit, void *ctx)
 {
 	memset(ctx, 0, sizeof(int));
 	return dlist_foreach(head, visit, ctx);
 }
 
-inline int dlist_print(const PNode const head, NODE_VISIT_HANDLE visit)
+inline int dlist_print(const PNode head, NODE_VISIT_HANDLE visit)
 {
 	return dlist_foreach(head, visit, NULL);
 }
 
-inline PNode dlist_find(const PNode const head, NODE_HANDLE cmp, void *ctx)
+inline PNode dlist_find(const PNode head, NODE_HANDLE cmp, void *ctx)
 {
 	PNode node = NULL, next = NULL;
 

@@ -48,15 +48,15 @@ inline PNode dlist_add_new(const PNode, void *data);
 inline PNode dlist_add_tail_new(const PNode, void *data);
 inline int dlist_append(const PNode, void *data);
 inline int dlist_prepend(const PNode, void *data);
-inline int dlist_empty(const PNode const);
-inline int dlist_length(const PNode const);
+inline int dlist_empty(const PNode );
+inline int dlist_length(const PNode );
 inline int dlist_destroy(const PNode, NODE_HANDLE, void *);
 inline int dlist_sort(const PNode, const NODE_SORT_HANDLE, const int);
-inline int dlist_find_max(const PNode const, NODE_VISIT_HANDLE, void *);
-inline int dlist_sum(const PNode const, NODE_VISIT_HANDLE, void *);
-inline int dlist_print(const PNode const, NODE_VISIT_HANDLE);
-inline int dlist_foreach(const PNode const, NODE_VISIT_HANDLE, void *);
+inline int dlist_find_max(const PNode , NODE_VISIT_HANDLE, void *);
+inline int dlist_sum(const PNode , NODE_VISIT_HANDLE, void *);
+inline int dlist_print(const PNode , NODE_VISIT_HANDLE);
+inline int dlist_foreach(const PNode , NODE_VISIT_HANDLE, void *);
 inline int dlist_del_by_filter(PNode, NODE_HANDLE, void *, NODE_FILTER);
-inline PNode dlist_find(const PNode const head, NODE_HANDLE cmp, void *ctx);
+inline PNode dlist_find(const PNode head, NODE_HANDLE cmp, void *ctx);
 
 #endif	// _LIST_H

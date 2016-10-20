@@ -2,7 +2,7 @@
 #define __QUEUE_H__
 
 #include <stdio.h>
-#include <malloc.h>
+#include <stdlib.h>
 #include <pthread.h>
 
 typedef struct _Node
