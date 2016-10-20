@@ -2,7 +2,6 @@ OBJS=$(patsubst %.c,%.o,$(wildcard *.c))
 CFLAGS+= -Wall -g -D__DEBUG__
 CC=gcc
 
-PROG=/home/liupeng/program/
 BACKUP_DIRS=$(PROG)/backup/
 INCLUDE_DIRS+= -I$(PROG)/include/list 
 INCLUDE_DIRS+= -I$(PROG)/include/mem
