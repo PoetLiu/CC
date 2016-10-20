@@ -3,5 +3,6 @@
 *.tar
 *.gz
 *.rar
+*.so
 tags
 backup

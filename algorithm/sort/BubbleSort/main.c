@@ -9,25 +9,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "debug.h"
-#include "mem.h"
+#include "mylib.h"
 
 #define NUM	10
-
-static int _rand(void)
-{
-	static int first = 0;
-	if (!first) {
-		first	= 1;
-		srand(time(NULL));
-	}
-	return rand();
-}
-
-int my_rand(int start, int end) 
-{
-	return start + _rand() % (end - start);
-}
 
 int main(void) 
 {
