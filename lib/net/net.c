@@ -8,7 +8,6 @@
 #include <sys/types.h>
 #include <netinet/in.h>
 #include <fcntl.h>
-#include "net.h"
 #include "mylib.h"
 
 int connect_timeout(int fd, const struct sockaddr * dest, int dlen, struct timeval timeout)
@@ -341,76 +340,6 @@ int read_str_from_fd(int fd, char *buf, int len, struct timeval timeout)
 	}
 }
 
-// 将一个字节的二进制数转换为2字节字符
-// 即将二进制的数字转换为对应的16进制字符
-// 比如data为00010001(一个字节)转换为"11"(00110001 00110001)两个字节
-//	     11111111转换为"FF" 
-// 从其本质上来说， 虽然内存中的数据经过转换之后发生了变化
-// 但其代表的数值不变， 只不过数字存的是其数值， 而字符存的是其ascii
-// 码对应的数值
-//free
-unsigned char *char_bin_to_str(unsigned char data)
-{
-        unsigned char *buf;
-        buf = malloc(2);
-        unsigned char hi,lo;
-
-        hi = (data >> 4) & 0x0f;
-        lo = data & 0x0f;
-
-        if ((lo >= 0) && (lo < 10)) {
-                buf[0] = 0x30 + lo;
-        }
-
-        if ((lo > 9) && (lo < 16)) {
-                buf[0] = 0x41 + lo - 10;
-        }
-
-        if ((hi >= 0) && (hi < 10)) {
-                buf[1] = 0x30 + hi;
-        }
-
-        if ((hi > 9) && (hi < 16)) {
-                buf[1] = 0x41 + hi - 10;
-        }
-
-        return buf;
-}
-
-/*
- *将多个二进制转换成字符串
- */
-//free
-char *bin_to_str(char *bin, int len)
-{
-        char *data;
-        char *id_tmp;
-        int i;
-
-        data = malloc(len * 2 + 1);
-        for (i = 0; i < len; i++) {
-                id_tmp		= char_bin_to_str(bin[i]);
-                data[i*2]	= id_tmp[1];
-                data[i*2+1]	= id_tmp[0];
-                free(id_tmp);
-        }
-        data[i*2] = '\0';
-
-        return data;
-}
-
-void get_wan_ip(int fd, char *wan_ip)
-{
-	int			len;
-	struct sockaddr_in	addr;
-
-	len	= sizeof(struct sockaddr_in);
-	if (getsockname(fd, (struct sockaddr *)&addr, &len) != 0) {
-		DEBUG("getsockname faild\n");	
-		return;
-	} 
-	strcpy(wan_ip, inet_ntoa(addr.sin_addr));
-}
 
 int socket_init(int port, int prot)
 {
@@ -499,27 +428,4 @@ err_r:
 	return -1;
 }
 
-// 检查字符串尾的'\0'是否符合要求
-// force选项表示指定字符串长度(即指定'\0'位置)
-// 不加force选项将在str[0] - str[max_len]范围内查找'\0'
-// 查找失败 或者str长度为0 或者str为NULL都视为错误
-int str_tail_check(const char *str, int max_len, int force)
-{
-	const char *tmp;
-	int i;
-	tmp	= str;
 
-	if (str == NULL)
-		return 1;
-
-	for (i = 0; i < max_len + 1; i++) {
-		if (tmp[i] == '\0')
-			break;
-	}
-
-	if (force)
-		return !(i == max_len);
-	else
-		return !(i != 0 && i < max_len);
-
-}

@@ -2,7 +2,24 @@
 #include <stdlib.h>
 #include <string.h>
 #include <pthread.h>
-#include "queue.h"
+#include "mylib.h"
+
+typedef struct _Node
+{
+	int dlen;		// 数据长度
+	void *data;		// 数据
+	struct _Node *pNext;	// 下一个节点
+	struct _Node *pPre;	// 上一个节点
+}Node;
+
+struct _Queue
+{
+	Node *front;		// 队列中第一个元素
+	Node *rear;		// 队列中最后一个元素
+	unsigned int length;	// 队列长度
+	pthread_mutex_t lock;	// 互斥锁
+};
+
 
 /*--------------------------------------------
  * Node1.pNext->Node2.pNext->Node3.pNext->NULL

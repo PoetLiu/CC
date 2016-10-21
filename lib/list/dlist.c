@@ -7,11 +7,9 @@
  * @func:
 **/
 
-#include "debug.h"
-#include "list.h"
-#include "mem.h"
 #include <stdlib.h>
 #include <memory.h>
+#include "mylib.h"
 
 struct _Node
 {
@@ -19,6 +17,7 @@ struct _Node
 	struct _Node 	*prev;
 	void		*data;
 };
+
 
 static Locker *dlist_lock;
 
