@@ -24,27 +24,28 @@ typedef struct sort_cfg {
 
 static int _quick_sort(void *data, int start, int end, VISIT_CB visit, CMP_CB cmp, SWAP_CB swap)
 {
-	int ref = start, left = ref, right = end;
+	int ref = start, left = start+1, right = end;
 
 	P_VALID_CHECK_RET(data, -1);
 	P_VALID_CHECK_RET(visit, -1);
 	P_VALID_CHECK_RET(cmp, -1);
 	P_VALID_CHECK_RET(swap, -1);
 
-	if (start > end)
+	if (end - start <= 1)
 		return 0;
 
-	while (left != right) {
+	while (left < right) {
 		// Begin in last right, find less than ref.
-		while (cmp(visit(data, right), visit(data, ref)) != CMP_RES_LESS && right > left) 
+		while (cmp(visit(data, right), visit(data, ref)) != CMP_RES_LESS && right > start) 
 			right--;
 		// Begin in frist left, find big than ref.
-		while (cmp(visit(data, left), visit(data, ref)) != CMP_RES_GREATER && left < right)
+		while (cmp(visit(data, left), visit(data, ref)) != CMP_RES_GREATER && left < end)
 			left++;
-		if (left < right)
-			swap(visit(data, left), visit(data, right));
+		if (!(left < right))
+			break;
+		swap(visit(data, left), visit(data, right));
 	}
-
+	
 	swap(visit(data, right), visit(data, ref));
 	_quick_sort(data, start, right-1, visit, cmp, swap);
 	_quick_sort(data, right+1, end, visit, cmp, swap);
@@ -89,8 +90,6 @@ int swap(void *l, void *r)
 
 	P_VALID_CHECK_RET(l, -1);
 	P_VALID_CHECK_RET(r, -1);
-	if (l == r)
-		return 0;
 	tmp	= *((int *)l);
 	*((int *)l)	= *((int *)r);
 	*((int *)r)	= tmp;
