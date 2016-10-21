@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "mylib.h"
 
-#define NUM	20
+#define NUM	50000000llu
 
 enum CMP_RES {
 	CMP_RES_EQUAL,
@@ -11,20 +11,20 @@ enum CMP_RES {
 
 typedef int (*CMP_CB)(void *data_l, void *data_r);
 typedef int (*SWAP_CB)(void *data_l, void *data_r);
-typedef void *(*VISIT_CB)(void *data, int id);
+typedef void *(*VISIT_CB)(void *data, uint64_t id);
 
 typedef struct sort_cfg {
 	VISIT_CB	visit;
 	CMP_CB		cmp;
 	SWAP_CB		swap;
 	int 		order;
-	int 		num;
+	uint64_t	num;
 	void 		*data;
 }Sort_Cfg;
 
-static int _quick_sort(void *data, int start, int end, VISIT_CB visit, CMP_CB cmp, SWAP_CB swap)
+static int _quick_sort(void *data, uint64_t start, uint64_t end, VISIT_CB visit, CMP_CB cmp, SWAP_CB swap)
 {
-	int ref = start, left = ref, right = end;
+	uint64_t ref = start, left = ref, right = end;
 
 	P_VALID_CHECK_RET(data, -1);
 	P_VALID_CHECK_RET(visit, -1);
@@ -46,8 +46,10 @@ static int _quick_sort(void *data, int start, int end, VISIT_CB visit, CMP_CB cm
 	}
 
 	swap(visit(data, right), visit(data, ref));
-	_quick_sort(data, start, right-1, visit, cmp, swap);
-	_quick_sort(data, right+1, end, visit, cmp, swap);
+	if (right > start)
+		_quick_sort(data, start, right-1, visit, cmp, swap);
+	if (right < end)
+		_quick_sort(data, right+1, end, visit, cmp, swap);
 	return 0;
 }
 
@@ -62,7 +64,7 @@ int quick_sort(Sort_Cfg *cfg)
 	return 0;
 }
 
-void *visit(void *data, int id)
+void *visit(void *data, uint64_t id)
 {
 	P_VALID_CHECK_RET(data, NULL);
 	return &((int*)data)[id];
@@ -97,9 +99,9 @@ int swap(void *l, void *r)
 	return 0;
 }
 
-void array_print(int *data, int num)
+void array_print(int *data, uint64_t num)
 {
-	int i = 0;
+	uint64_t i = 0;
 	P_VALID_CHECK_ACT(data, return);
 	for (i = 0; i < num; i++) {
 		printf("%d ", data[i]);
@@ -107,27 +109,32 @@ void array_print(int *data, int num)
 	printf("\n");
 }
 
-int main(void) 
+int main(int argc, char *argv[]) 
 {
-	int i = 0, data[NUM] = {0};
+	int *data = NULL;
+	uint64_t i = 0;
 	Sort_Cfg cfg = {
 		.visit	= visit,
 		.cmp	= cmp,
 		.swap	= swap,
 		.order	= 0,
-		.num	= ARRAY_SIZE_GET(data),
-		.data	= data,
+		.num	= NUM,
 	};
 
+	data	= malloc(sizeof *data * NUM);
+	P_VALID_CHECK_RET(data, -1);
+	cfg.data	= data;
+
 	// generate random numbers.
-	DEBUG("Generate %d numbers to sort:\n", NUM);
-	for (i = 0; i < ARRAY_SIZE_GET(data); i++) {
-		data[i]	= my_rand(0, 100);
-		printf("%d ", data[i]);
+	DEBUG("Generate %llu numbers to sort.\n", NUM);
+	for (i = 0; i < NUM; i++) {
+		data[i]	= my_rand(0, (int)NUM);
+		//printf("%d ", data[i]);
 	}
 	printf("\n");
 	quick_sort(&cfg);
-	DEBUG("After sort:\n");
-	array_print(data, ARRAY_SIZE_GET(data));
+	//DEBUG("After sort:\n");
+	//array_print(data, NUM);
+	SAFE_FREE(data);
 	return 0;
 }	
