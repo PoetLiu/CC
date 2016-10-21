@@ -1,2 +1,2 @@
-TARGET=mytcp.out
-include /home/liupeng/program/make.inc 
+TARGET=main.out
+include $(PROG)/make.inc

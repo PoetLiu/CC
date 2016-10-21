@@ -1,2 +1,2 @@
-TARGET=mydos.out
-include $(PROG)/make.inc 
+TARGET=main.out
+include $(PROG)/make.inc
