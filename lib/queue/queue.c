@@ -32,7 +32,7 @@ Queue *init_queue()
 {
 	Queue *new_q = NULL;
 	new_q	= (Queue *)malloc(sizeof(Queue));
-	POINTER_CHECK(new_q, NULL);
+	P_VALID_RET(new_q, NULL);
 
 	new_q->front	= NULL;
 	new_q->rear	= NULL;
@@ -46,7 +46,7 @@ int empty_queue(Queue *pQueue)
 {
 	unsigned int len = 0;
 
-	POINTER_CHECK(pQueue, 1);
+	P_VALID_RET(pQueue, 1);
 	pthread_mutex_lock(&pQueue->lock);
 	len	= pQueue->length;
 	pthread_mutex_unlock(&pQueue->lock);
@@ -64,12 +64,12 @@ int en_queue(Queue *pQueue, void *data, int dlen)
 {
 	Node *new_node = NULL;
 	// param check
-	POINTER_CHECK(pQueue, -1);
-	POINTER_CHECK(data, -1);
+	P_VALID_RET(pQueue, -1);
+	P_VALID_RET(data, -1);
 
 	// get new_node
 	new_node	= (Node *)malloc(sizeof(Node));
-	POINTER_CHECK(new_node, -1);
+	P_VALID_RET(new_node, -1);
 	new_node->data	= (void *)malloc(dlen);
 	if (new_node->data == NULL) {
 		SAFE_FREE(new_node);
@@ -102,7 +102,7 @@ int en_queue(Queue *pQueue, void *data, int dlen)
 // node->date maybe NULL, if user used cp_flag=0 when call de_queue
 static int free_node(Node *node)
 {
-	POINTER_CHECK(node, -1);
+	P_VALID_RET(node, -1);
 	SAFE_FREE(node->data);
 	SAFE_FREE(node);
 	return 0;
@@ -116,7 +116,7 @@ int de_queue(Queue *pQueue, void *data, int *dlen, int cp_flag)
 {
 	Node *de_node = NULL;
 	int ret = 0;
-	POINTER_CHECK(pQueue, -1);
+	P_VALID_RET(pQueue, -1);
 	
 	pthread_mutex_lock(&pQueue->lock);
 	if (_empty_queue(pQueue)) {
@@ -191,7 +191,7 @@ void travel_queue(Queue *pQueue, const char fmt)
 int destroy_queue(Queue *pQueue)
 {
 	Node *de_node = NULL, *de_node_pre = NULL;
-	POINTER_CHECK(pQueue, -1);
+	P_VALID_RET(pQueue, -1);
 	if (empty_queue(pQueue)) 
 		goto free_out;
 

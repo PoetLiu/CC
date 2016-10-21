@@ -79,7 +79,7 @@ int get_socket(int reuse, int prot)
 		DEBUG("socket faild\n");	
 		return -1;
 	}
-	if (setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, (char *)&reuse, sizeof(reuse)) == -1) {
+	if (reuse && setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, (char *)&reuse, sizeof(reuse)) == -1) {
 		DEBUG("set SO_REUSEADDR error\n");
 		close(fd);
 		return -1;

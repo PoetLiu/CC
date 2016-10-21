@@ -12,9 +12,9 @@ CFLAGS+=-I$(PROG)/include/
 MYLIB=$(PROG)/lib/mylib.so
 LIBS+=$(MYLIB)
 
-.PHONY: clean all tar $(DEPEND)
+.PHONY: clean all tar $(DEPEND) $(MYLIB)
 
-all: $(DEPEND) $(TARGET) $(ACT) $(LIBS)
+all: $(LIBS) $(DEPEND) $(TARGET) $(ACT) 
 
 $(TARGET): $(OBJS)
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) $(LIBS)
@@ -22,8 +22,9 @@ $(TARGET): $(OBJS)
 %.o: %.c
 	$(CC) -c $< -o $@ $(CFLAGS) 
 
-$(MYLIB): $(PROG)/include $(PROG)/lib
+$(MYLIB):
 	make -C $(PROG)/lib
+
 clean:
 	rm -rf *.o $(TARGET) $(CLEAN_OBJ)
 

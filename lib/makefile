@@ -6,8 +6,8 @@ CFLAGS+=$(INCLUDE_DIRS) -fPIC
 DIRS=$(shell find $(PROG)/lib -type d)
 SRC=$(foreach dir,$(DIRS),$(wildcard $(dir)/*.c))
 
-$(TARGET): $(PROG)/include $(SRC)
-	$(CC) -o $@ $(CFLAGS) -shared $(SRC)  -lm
+$(TARGET): $(INC_DIRS) $(SRC)
+	$(CC) -o $@ $(CFLAGS) -shared $(SRC)  -lm -lpthread -lcrypto
 
 clean:
 	rm -rf $(TARGET)

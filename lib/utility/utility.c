@@ -6,6 +6,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <string.h>
+#include <dirent.h>
 #include "mylib.h"
 
 static int _rand(void)
@@ -363,3 +364,72 @@ int get_now_tm(struct tm *value)
 
 	return 0;
 }
+
+int close_parent_fd(void)
+{
+        struct dirent **namelist = NULL;
+        int n = 0;
+        char dir[2048] = {0};
+
+        sprintf(dir,"/proc/%d/fd", getpid());
+
+        n = scandir(dir, &namelist, 0, alphasort);
+        if(n < 0){
+                return -1;
+        }
+
+        while(n--){
+                int fd =  0;
+                if(strcmp(".", namelist[n]->d_name) == 0){
+                        free(namelist[n]);
+                        continue;
+                }
+                if(strcmp("..", namelist[n]->d_name) == 0){
+                        free(namelist[n]);
+                        continue;
+                }
+                fd = atoi(namelist[n]->d_name);
+                if(fd == 0 || fd == 1 || fd == 2){
+                        free(namelist[n]);
+                        continue;
+                }
+                close(fd);
+                free(namelist[n]);
+        }
+
+        free(namelist);
+
+        return 0;
+}
+
+pid_t pid_get(char *name)
+{
+	FILE *fp;
+	char *ret = NULL;
+	char buf[1024] = {0};
+	char cmdline[1024] = {0};
+	pid_t	pid = -1;
+
+	P_VALID_RET(name, -1);
+	snprintf(cmdline, sizeof(cmdline), "pidof %s", name);
+	DEBUG("cmdline:%s\n", cmdline);
+
+	fp	= popen(cmdline, "r");
+	if (!fp) {
+		DEBUG("popen faild\n");	
+		return -1;
+	}
+	
+	ret 	= fgets(buf, sizeof(buf), fp);
+	if (!ret) {
+		DEBUG("get pipe data faild\n");	
+		return -1;
+	}
+
+	sscanf(buf, "%d", &pid);
+	DEBUG("buf:%s pid:%d\n", buf, pid);
+	pclose(fp);
+
+	return pid;
+}
+

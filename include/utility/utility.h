@@ -23,5 +23,7 @@ int mac_check_valid(char *mac);
 int ip_check_valid(char *ip);
 time_t get_now_time(void);
 int get_now_tm(struct tm *value);
+int close_parent_fd(void);
+pid_t pid_get(char *name);
 
 #endif
