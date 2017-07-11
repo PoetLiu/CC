@@ -1,4 +1,5 @@
 OBJS=$(patsubst %.cpp,%.o,$(wildcard *.cpp))
+OBJS+=$(patsubst %.cc,%.o,$(wildcard *.cc))
 CFLAGS+= -Wall -g -D__DEBUG__
 CC=g++
 
@@ -15,12 +16,10 @@ LIBS+=$(MYLIB)
 .PHONY: clean all tar $(DEPEND)
 
 all: $(DEPEND) $(TARGET) $(ACT) $(LIBS)
+	echo $(OBJS)
 
 $(TARGET): $(OBJS)
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) $(LIBS)
-
-%.o: %.c
-	$(CC) -c $< -o $@ $(CFLAGS) 
 
 $(MYLIB): $(PROG)/include $(PROG)/lib
 	make -C $(PROG)/lib
