@@ -193,11 +193,11 @@ static int rw_locker_rdlock(RwLocker *thiz)
 	P_VALID_CHECK_RET(thiz, -1);
 	
 	if ((ret = locker_lock(thiz->rd_locker)) == 0) {
-		thiz->readers++;
 		if (thiz->readers == 0) {
 			ret	= locker_lock(thiz->rw_locker);
 			thiz->mode	= RW_LOCKER_RD;
 		}
+		thiz->readers++;
 		locker_unlock(thiz->rd_locker);	
 	}
 	return ret;
