@@ -484,3 +484,20 @@ static int tcp_recv_data(int sock, void *p_buff, int size, int data_len)
 	}
 	return read_len;
 }
+
+int setnonblocking(int sock) {
+	int opts;
+	opts = fcntl(sock, F_GETFL);
+	if (opts < 0) {
+		ERROR("fcntl(sock,GETFL)\n");
+		return -1;
+	}
+
+	opts = opts | O_NONBLOCK;
+	if (fcntl(sock, F_SETFL, opts) < 0) {
+		ERROR("fcntl(sock,SETFL,opts)\n");
+		return -2;
+	}
+
+	return 0;
+}
